@@ -29,7 +29,7 @@
       <p class="tagline">FastAPI · RAG · LLMOps · Observability · Automation</p>
       <div class="actions">
         <a class="button primary" href="#projects">View projects</a>
-        <button class="button" id="terms-toggle" type="button" aria-expanded="false" aria-controls="terms-panel">Technical terms</button>
+        <a class="button" href="#technical-terms">Technical terms</a>
       </div>
     </div>
   </section>
@@ -79,41 +79,50 @@
       </div>
     </section>
 
-    <section class="section terms-panel hidden" id="terms-panel" aria-labelledby="terms-title">
-      <h2 id="terms-title">Technical terms, in plain English</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>LLM</h3>
-          <p>A Large Language Model is a probabilistic model that predicts likely text from training patterns and the context it receives. Because it is probabilistic, it can produce fluent but incorrect answers.</p>
-        </div>
-        <div class="card">
-          <h3>RAG</h3>
-          <p>Retrieval-Augmented Generation retrieves relevant information from a controlled document base before asking the model to answer. It grounds answers in available documents; it does not simply make the AI smarter.</p>
-        </div>
-        <div class="card">
-          <h3>JSON contracts</h3>
-          <p>JSON is a structured text format for predictable instructions, configuration, requests, responses and execution records. Here, JSON structures are contracts between components, not informal notes.</p>
-        </div>
-        <div class="card">
-          <h3>Trace / trace_id</h3>
-          <p>A trace is an execution record. It helps answer what was asked, through which channel, using which model, with which evidence, how long it took, how many tokens were used and what failed.</p>
-        </div>
-        <div class="card">
-          <h3>Hallucinations</h3>
-          <p>A hallucination is a confident-sounding answer that is not properly supported by evidence. The goal is not to claim they disappear, but to make them easier to detect, reduce and evaluate.</p>
-        </div>
-        <div class="card">
-          <h3>Tokens</h3>
+    <section class="section" id="technical-terms">
+      <p class="eyebrow">Plain English</p>
+      <h2>Technical terms, in plain English</h2>
+
+      <div class="terms-list">
+        <details class="term-item">
+          <summary>LLM</summary>
+          <p>A Large Language Model is a probabilistic system that generates likely text from context. It can be useful, but it can also produce fluent wrong answers.</p>
+        </details>
+
+        <details class="term-item">
+          <summary>RAG</summary>
+          <p>Retrieval-Augmented Generation means retrieving relevant documents before asking the model to answer. The goal is to ground the answer in available evidence.</p>
+        </details>
+
+        <details class="term-item">
+          <summary>JSON contracts</summary>
+          <p>JSON is used as a structured format for requests, responses, configuration and execution records. It makes system behavior easier to validate and debug.</p>
+        </details>
+
+        <details class="term-item">
+          <summary>Trace / trace_id</summary>
+          <p>A trace is the execution record of one run: what was asked, which model was used, what evidence was retrieved, how many tokens were consumed, how long it took and what failed.</p>
+        </details>
+
+        <details class="term-item">
+          <summary>Hallucination</summary>
+          <p>A hallucination is a confident answer not properly supported by evidence. The goal is not to pretend hallucinations disappear, but to make them easier to detect, reduce and evaluate.</p>
+        </details>
+
+        <details class="term-item">
+          <summary>Tokens</summary>
           <p>Tokens are small pieces of text processed by the model. Tracking input and output tokens helps estimate cost, latency and workload.</p>
-        </div>
-        <div class="card">
-          <h3>Runtime</h3>
-          <p>The runtime is the controlled execution layer around the model. It decides how requests are handled, how policies are applied, how tools are called and how the result is traced.</p>
-        </div>
-        <div class="card">
-          <h3>Provider adapter</h3>
-          <p>A provider adapter lets the backend talk to different model providers, such as a local model server or a cloud API, without rewriting the whole application.</p>
-        </div>
+        </details>
+
+        <details class="term-item">
+          <summary>Runtime</summary>
+          <p>The runtime is the controlled execution layer around the model. It handles requests, applies rules, routes providers, records traces and prevents the model from owning the whole system.</p>
+        </details>
+
+        <details class="term-item">
+          <summary>Provider adapter</summary>
+          <p>A provider adapter is a small integration layer that lets the backend talk to different model providers, such as a local model server or a cloud API, without rewriting the whole application.</p>
+        </details>
       </div>
     </section>
 
@@ -254,6 +263,5 @@
   <footer class="footer">
     <div class="wrap">Static GitHub Pages portfolio. No dependencies and no sensitive data. <a href="ai-assisted-development.html">AI-assisted development</a>.</div>
   </footer>
-  <script src="script.js"></script>
 </body>
 </html>
