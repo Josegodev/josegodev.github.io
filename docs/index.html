@@ -1,249 +1,266 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Technical portfolio of José González Oliva, Backend & AI Engineer focused on FastAPI, RAG, LLM providers, Telegram integration, JSON traces, evaluation and operational observability.">
-  <title>José González Oliva | Backend & AI Engineer</title>
-  <link rel="stylesheet" href="styles.css">
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>José González Oliva | Backend &amp; AI Engineer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&amp;family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0b111a;
+            font-family: 'Geist', sans-serif;
+            color: #dde2f0;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#002116",
+                    "surface-container-highest": "#2f353f",
+                    "on-error": "#690005",
+                    "error-container": "#93000a",
+                    "secondary-fixed": "#ffddb8",
+                    "on-primary-fixed-variant": "#00513a",
+                    "on-primary": "#003827",
+                    "on-error-container": "#ffdad6",
+                    "surface": "#0e141d",
+                    "on-primary-container": "#004e38",
+                    "tertiary-fixed-dim": "#bbc7dc",
+                    "on-tertiary-fixed-variant": "#3c4859",
+                    "surface-dim": "#0e141d",
+                    "surface-container": "#1a2029",
+                    "secondary": "#ffb95f",
+                    "surface-tint": "#44dfab",
+                    "outline-variant": "#3c4a43",
+                    "primary-container": "#20c997",
+                    "background": "#0e141d",
+                    "on-tertiary": "#253141",
+                    "on-background": "#dde2f0",
+                    "on-surface-variant": "#bbcac1",
+                    "on-tertiary-fixed": "#101c2c",
+                    "error": "#ffb4ab",
+                    "inverse-on-surface": "#2b313b",
+                    "primary-fixed-dim": "#44dfab",
+                    "primary-fixed": "#67fcc6",
+                    "primary": "#4de6b1",
+                    "surface-container-high": "#242a34",
+                    "inverse-surface": "#dde2f0",
+                    "secondary-container": "#ee9800",
+                    "surface-bright": "#343944",
+                    "on-secondary": "#472a00",
+                    "outline": "#85948c",
+                    "tertiary-container": "#a7b3c7",
+                    "surface-variant": "#2f353f",
+                    "inverse-primary": "#006c4f",
+                    "tertiary": "#c2cee3",
+                    "tertiary-fixed": "#d7e3f9",
+                    "on-secondary-fixed": "#2a1700",
+                    "on-secondary-container": "#5b3800",
+                    "on-tertiary-container": "#394556",
+                    "on-secondary-fixed-variant": "#653e00",
+                    "on-surface": "#dde2f0",
+                    "surface-container-low": "#161c25",
+                    "surface-container-lowest": "#080e17",
+                    "secondary-fixed-dim": "#ffb95f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "margin": "auto",
+                    "lg": "2.5rem",
+                    "sm": "1rem",
+                    "md": "1.5rem",
+                    "base": "4px",
+                    "xs": "0.5rem",
+                    "xl": "4rem"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Geist"],
+                    "label-caps": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Geist"],
+                    "headline-xl": ["Geist"],
+                    "code-sm": ["JetBrains Mono"],
+                    "body-md": ["Geist"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "code-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
 </head>
-<body>
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="index.html">José González Oliva</a>
-      <nav class="nav-links" aria-label="Main navigation">
-        <a href="#projects">Projects</a>
-        <a href="#metrics">Metrics</a>
-        <a href="#stack">Stack</a>
-        <a href="#status">Status</a>
-        <a href="#limitations">Limitations</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="wrap">
-      <p class="eyebrow">Backend & AI Engineer</p>
-      <h1>José González Oliva</h1>
-      <p class="subtitle">I build traceable, reproducible and operable AI backends. The model is not the whole system; it is a replaceable component inside a backend that owns contracts, evidence, policies, traces and evaluation.</p>
-      <p class="tagline">FastAPI · RAG · LLMOps · Observability · Automation</p>
-      <div class="actions">
-        <a class="button primary" href="#projects">View projects</a>
-        <a class="button" href="#technical-terms">Technical terms</a>
-      </div>
-    </div>
-  </section>
-
-  <main class="wrap">
-    <section class="section" aria-labelledby="what-i-build">
-      <h2 id="what-i-build">I build operational harnesses for local LLMs</h2>
-      <p>Not just chatbots or AI demos. I build the control layer around language models: retrieval, context, prompts, model calls, validation, traces, metrics, errors, replayability and evaluation.</p>
-      <p>A harness is the execution layer that makes a local LLM usable as a software component. The model is only one part of the system; around it, the harness controls what context it receives, what evidence it uses, how each answer is traced, how failures are detected and how different models can be compared under the same conditions.</p>
-      <figure class="comparison-figure harness-figure">
-        <img class="comparison-image" src="../IMAGENES/0b9eb604-a226-4fba-a9bb-fbb0c9ac436d.png" alt="Comparison infographic showing Cloud, OpenClaw and NUCLEO as three AI system architectures, highlighting runtime scope, extensions, memory, evidence, control and execution.">
-      </figure>
-      <div class="grid two">
-        <details class="card harness-card">
-          <summary>Local model execution</summary>
-          <p>FastAPI backends connected to local LLM providers such as Ollama and LM Studio, with provider-independent boundaries.</p>
-        </details>
-        <details class="card harness-card">
-          <summary>Controlled retrieval and context</summary>
-          <p>RAG over local documents, structured prompts, controlled context injection, retrieval status and source tracking.</p>
-        </details>
-        <details class="card harness-card">
-          <summary>Traceable runs</summary>
-          <p>Each execution can carry a trace_id or run_id, plus latency, token usage, estimated cost, errors and retrieval status.</p>
-        </details>
-        <details class="card harness-card">
-          <summary>Replay and evaluation</summary>
-          <p>Replay harnesses make it possible to compare outputs across models, prompts and retrieval settings with the same inputs.</p>
-        </details>
-        <details class="card harness-card">
-          <summary>Shared backend clients</summary>
-          <p>Frontend and Telegram interfaces act as clients of the same backend instead of becoming separate AI systems.</p>
-        </details>
-        <details class="card harness-card">
-          <summary>Prototype-to-production mindset</summary>
-          <p>The focus is operational, traceable, auditable and reproducible behavior, without claiming the current system is production-grade.</p>
-        </details>
-      </div>
-    </section>
-
-    <section class="section architecture-comparison" aria-labelledby="runtime-comparison">
-      <p class="eyebrow">Architecture comparison</p>
-      <h2 id="runtime-comparison">Controlled AI Runtime: Cloud, OpenClaw and NUCLEO</h2>
-      <p>This comparison shows three different ways to structure AI systems. Cloud platforms prioritize managed services and fast deployment. OpenClaw represents a persistent agent-oriented approach with routing, plugins and background workflows. NUCLEO (LOCALES) focuses on controlled execution: the model is only one replaceable component inside a governed backend runtime.</p>
-
-      <div class="grid">
-        <article class="card">
-          <h3>Cloud</h3>
-          <p>Cloud AI platforms are useful when speed, scalability and managed services matter most. The trade-off is stronger coupling to the provider stack, less internal control over orchestration, and higher dependency on external pricing, APIs and operational limits.</p>
-        </article>
-        <article class="card">
-          <h3>OpenClaw</h3>
-          <p>OpenClaw represents a more agent-oriented architecture: persistent background processes, routing, plugins, session queues and multi-agent workflows. This is powerful for continuous automation, but it also increases operational complexity.</p>
-        </article>
-        <article class="card">
-          <h3>NUCLEO (LOCALES)</h3>
-          <p>NUCLEO is focused on controlled AI execution. A request enters through FastAPI and moves through explicit runtime boundaries: AgentService, AgentRuntime, Planner, PolicyEngine, ToolRegistry, RAG evidence and controlled execution.</p>
-        </article>
-      </div>
-
-      <div class="card solve-card">
-        <h3>What NUCLEO solves</h3>
-        <p>NUCLEO is not another chatbot. It solves the operational problem of making LLM execution observable, reproducible and debuggable. Each run can record which model was used, which prompt version was active, what evidence was retrieved, which tool was called, whether policy allowed it, how many tokens were consumed, how long it took and what failed.</p>
-        <ul class="plain-list">
-          <li>The model proposes, but the runtime validates.</li>
-          <li>Tools are executed through explicit contracts.</li>
-          <li>RAG evidence is tracked with chunks, sources and retrieval status.</li>
-          <li>Dry runs allow validation without real execution.</li>
-          <li>Approval gates separate planning from action.</li>
-          <li>Traces make debugging and evaluation possible.</li>
-          <li>Local and hybrid model providers can be swapped without rewriting the runtime.</li>
-        </ul>
-        <p>The objective is controlled AI execution: observable, reproducible, debuggable and independent from blind dependency on a single model provider.</p>
-      </div>
-    </section>
-
-    <section class="section narrative" aria-labelledby="background">
-      <p class="eyebrow">Background</p>
-      <h2 id="background">From aerospace systems to local AI</h2>
-      <div class="card narrative-card">
-        <p class="lead">I am an engineer with experience in demanding industrial and aerospace systems. I have worked as a manufacturing engineer in critical environments linked to Airbus and Indra, where traceability, technical documentation, process validation and error control are not optional.</p>
-        <p>That background gives me a practical view of why introducing AI into productive systems is difficult: integration with existing processes, quality control, provider dependency, missing traceability, error handling, operational cost, documentation and long-term maintainability.</p>
-        <p>From that perspective I develop NUCLEO, a research and engineering line focused on controlled, traceable and reproducible AI backends. The core idea is that the model should not be the entire system, but one replaceable component inside an architecture with contracts, policies, observability, document retrieval and evaluation.</p>
-        <p>As part of that work I maintain LOCALES, a local lab used to test FastAPI, local models, document RAG, Telegram integration, JSON traces, per-execution metrics and separation between runtime, LLM provider and application layer.</p>
-        <p>The objective is not to create another chatbot. It is to explore how generative AI can move toward systems that are measurable, debuggable, auditable and adaptable to real environments.</p>
-      </div>
-    </section>
-
-    <section class="section" id="technical-terms">
-      <p class="eyebrow">Plain English</p>
-      <h2>Technical terms, in plain English</h2>
-
-      <div class="terms-list">
-        <details class="term-item">
-          <summary>LLM</summary>
-          <p>A Large Language Model is a probabilistic system that generates likely text from context. It can be useful, but it can also produce fluent wrong answers.</p>
-        </details>
-
-        <details class="term-item">
-          <summary>RAG</summary>
-          <p>Retrieval-Augmented Generation means retrieving relevant documents before asking the model to answer. The goal is to ground the answer in available evidence.</p>
-        </details>
-
-        <details class="term-item">
-          <summary>JSON contracts</summary>
-          <p>JSON is used as a structured format for requests, responses, configuration and execution records. It makes system behavior easier to validate and debug.</p>
-        </details>
-
-        <details class="term-item">
-          <summary>Trace / trace_id</summary>
-          <p>A trace is the execution record of one run: what was asked, which model was used, what evidence was retrieved, how many tokens were consumed, how long it took and what failed.</p>
-        </details>
-
-        <details class="term-item">
-          <summary>Hallucination</summary>
-          <p>A hallucination is a confident answer not properly supported by evidence. The goal is not to pretend hallucinations disappear, but to make them easier to detect, reduce and evaluate.</p>
-        </details>
-
-        <details class="term-item">
-          <summary>Tokens</summary>
-          <p>Tokens are small pieces of text processed by the model. Tracking input and output tokens helps estimate cost, latency and workload.</p>
-        </details>
-
-        <details class="term-item">
-          <summary>Runtime</summary>
-          <p>The runtime is the controlled execution layer around the model. It handles requests, applies rules, routes providers, records traces and prevents the model from owning the whole system.</p>
-        </details>
-
-        <details class="term-item">
-          <summary>Provider adapter</summary>
-          <p>A provider adapter is a small integration layer that lets the backend talk to different model providers, such as a local model server or a cloud API, without rewriting the whole application.</p>
-        </details>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="roles">
-      <h2 id="roles">Target roles</h2>
-      <div class="card">
-        <ul class="role-list">
-          <li>Backend Developer with AI</li>
-          <li>AI Engineer</li>
-          <li>Early LLMOps / AIOps</li>
-          <li>Automation Engineer</li>
-          <li>Product AI Engineer</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section" id="status" aria-labelledby="status-title">
-      <h2 id="status-title">Real maturity status</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>Advanced prototype</h3>
-          <p>The system demonstrates contracts, RAG, provider adapters, Telegram integration, JSON traces and evals, but remains a research and engineering prototype.</p>
-        </div>
-        <div class="card">
-          <h3>Local experimental backend</h3>
-          <p>The backend is designed for local experimentation and technical validation, not for public production traffic.</p>
-        </div>
-        <div class="card">
-          <h3>Curated demo</h3>
-          <p>The public portfolio shows synthetic examples and architecture decisions. It does not publish private corpora, real logs or local artifacts.</p>
-        </div>
-        <div class="card">
-          <h3>Not deployment-ready yet</h3>
-          <p>It still needs reproducible packaging, root dependency files, a minimal Dockerfile, parameterized URLs and extended healthchecks.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="projects" aria-labelledby="projects-title">
-      <h2 id="projects-title">Main projects</h2>
-      <div class="grid">
-        <article class="card">
-          <h3>Controlled local AI runtime</h3>
-          <p>FastAPI backend with explicit request/response contracts, bot/backend services, provider adapters and per-execution traceability.</p>
-          <a href="case-studies/nucleo-runtime.html">Read case study</a>
-          <div class="pill-row">
-            <span class="pill">FastAPI</span>
-            <span class="pill">Runtime</span>
-            <span class="pill">Tracing</span>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Evidence-first document RAG</h3>
-          <p>A RAG flow that checks whether evidence exists before asking the model to answer, with explicit EVIDENCE_FOUND / NO_EVIDENCE states.</p>
-          <a href="case-studies/rag-evidence-first.html">Read case study</a>
-          <div class="pill-row">
-            <span class="pill">RAG</span>
-            <span class="pill">Evidence</span>
-            <span class="pill">Documents</span>
-          </div>
-        </article>
-        <article class="card">
-          <h3>Telegram + observability</h3>
-          <p>Telegram as a secondary operational channel for testing the backend, with JSONL traces, token metrics, latency and error status.</p>
-          <a href="case-studies/telegram-observability.html">Read case study</a>
-          <div class="pill-row">
-            <span class="pill">Telegram</span>
-            <span class="pill">JSONL</span>
-            <span class="pill">Metrics</span>
-          </div>
-        </article>
-      </div>
-      <div class="actions">
-        <a class="button" href="case-studies/repo-maturity.html">View technical maturity</a>
-      </div>
-    </section>
-
-    <section class="section" id="metrics" aria-labelledby="metrics-title">
-      <h2 id="metrics-title">Execution metrics</h2>
-      <p>Every AI execution should leave an inspection record. The example below is synthetic and shows how the backend can record model, retrieval status, tokens, latency and result status.</p>
-      <div class="metric-block" aria-label="Synthetic JSON trace example">
-<pre>{
+<body class="selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation -->
+<header class="bg-background/80 backdrop-blur-md dark:bg-background/80 border-b border-white/5 docked full-width top-0 sticky z-50">
+<nav class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter py-4">
+<div class="font-headline-lg text-body-md font-bold text-on-surface dark:text-on-surface">
+                José González Oliva
+            </div>
+<div class="hidden md:flex gap-md font-body-md text-body-md">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#projects">Projects</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#metrics">Metrics</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#stack">Stack</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#status">Status</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#limitations">Limitations</a>
+</div>
+<a class="text-primary dark:text-primary-fixed font-bold scale-95 active:scale-90 transition-transform font-body-md text-body-md" href="https://github.com/Josegodev">Contact</a>
+</nav>
+</header>
+<main class="max-w-[1200px] mx-auto px-gutter">
+<!-- Hero Section -->
+<section class="py-xl flex flex-col items-start gap-md">
+<div class="flex flex-col gap-xs">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">Backend &amp; AI Engineer</span>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">José González Oliva</h1>
+<p class="font-body-md text-headline-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                    Traceable, reproducible and operable AI backends HARNESS
+                </p>
+<div class="flex flex-wrap gap-xs mt-xs text-on-surface-variant font-code-sm text-code-sm">
+<span class="px-xs py-[2px] bg-surface-container border border-white/5">FastAPI</span>
+<span class="px-xs py-[2px] bg-surface-container border border-white/5">RAG</span>
+<span class="px-xs py-[2px] bg-surface-container border border-white/5">LLMOps</span>
+<span class="px-xs py-[2px] bg-surface-container border border-white/5">Observability</span>
+<span class="px-xs py-[2px] bg-surface-container border border-white/5">Automation</span>
+</div>
+</div>
+<div class="flex gap-sm">
+<a class="bg-primary text-on-primary-fixed px-md py-sm font-bold text-body-md rounded-none hover:brightness-110 transition-all scale-95 active:scale-90" href="#projects">
+                    View projects
+                </a>
+<a class="border border-primary text-primary px-md py-sm font-bold text-body-md rounded-none hover:bg-primary/10 transition-all scale-95 active:scale-90" href="#stack">
+                    Technical terms
+                </a>
+</div>
+</section>
+<!-- Architecture Comparison: Bento Grid Style -->
+<section class="py-xl border-t border-white/5" id="architecture">
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-xs">Architecture Comparison</h2>
+<p class="font-body-md text-on-surface-variant max-w-3xl">Strategic approaches to structuring AI systems based on operational complexity and control requirements.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Cloud -->
+<div class="bg-surface-container p-md border border-white/5 hover:border-primary/20 transition-all group">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary text-3xl">cloud</span>
+<h3 class="font-headline-lg text-[24px] text-on-surface">Cloud</h3>
+</div>
+<p class="font-body-md text-on-surface-variant mb-md leading-relaxed">Managed services, APIs and agents in the cloud. Faster deployment but higher dependency on external pricing and limited internal control.</p>
+<div class="pt-md border-t border-white/5">
+<div class="text-label-caps text-secondary font-code-sm mb-xs">STRATEGY</div>
+<div class="text-on-surface font-body-md">Prioritize managed services and speed.</div>
+</div>
+</div>
+<!-- OpenClaw -->
+<div class="bg-surface-container p-md border border-white/5 hover:border-primary/20 transition-all">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary text-3xl">hub</span>
+<h3 class="font-headline-lg text-[24px] text-on-surface">OpenClaw</h3>
+</div>
+<p class="font-body-md text-on-surface-variant mb-md leading-relaxed">Agent-oriented architecture with routing, plugins and background workflows. Persistent daemon connected to apps and sessions.</p>
+<div class="pt-md border-t border-white/5">
+<div class="text-label-caps text-secondary font-code-sm mb-xs">STRATEGY</div>
+<div class="text-on-surface font-body-md">Focus on multi-agent workflow complexity.</div>
+</div>
+</div>
+<!-- NUCLEO -->
+<div class="bg-surface-container p-md border border-primary/30 relative overflow-hidden group">
+<div class="absolute top-0 right-0 bg-primary px-sm py-[2px] font-label-caps text-[10px] text-on-primary-fixed">CORE SYSTEM</div>
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">security</span>
+<h3 class="font-headline-lg text-[24px] text-on-surface">NUCLEO</h3>
+</div>
+<p class="font-body-md text-on-surface-variant mb-md leading-relaxed">Controlled execution focus. Built-in runtime, decoupled from the model. Explicit boundaries for tools, contracts, and RAG evidence.</p>
+<div class="pt-md border-t border-white/5">
+<div class="text-label-caps text-secondary font-code-sm mb-xs">STRATEGY</div>
+<div class="text-on-surface font-body-md">Localized, auditable, and traceable.</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Projects -->
+<section class="py-xl" id="projects">
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Main projects</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<!-- Project 1 -->
+<div class="group relative bg-surface-container-lowest border border-white/5 p-gutter hover:bg-surface-container transition-colors">
+<h3 class="font-headline-lg text-[20px] text-on-surface mb-sm">Controlled local AI runtime</h3>
+<p class="font-body-md text-on-surface-variant mb-lg">FastAPI backend with explicit request/response contracts, bot/backend services, and per-execution traceability.</p>
+<div class="flex flex-wrap gap-xs mb-lg">
+<span class="font-code-sm text-code-sm text-primary px-xs py-1 border border-primary/20">FastAPI</span>
+<span class="font-code-sm text-code-sm text-primary px-xs py-1 border border-primary/20">Runtime</span>
+<span class="font-code-sm text-code-sm text-primary px-xs py-1 border border-primary/20">Tracing</span>
+</div>
+<a class="font-label-caps text-secondary flex items-center gap-xs group-hover:gap-sm transition-all" href="case-studies/nucleo-runtime.html">Read case study <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<!-- Project 2 -->
+<div class="group relative bg-surface-container-lowest border border-white/5 p-gutter hover:bg-surface-container transition-colors">
+<h3 class="font-headline-lg text-[20px] text-on-surface mb-sm">Evidence-first document RAG</h3>
+<p class="font-body-md text-on-surface-variant mb-lg">A RAG flow that checks whether evidence exists before asking the model to answer, with explicit EVIDENCE_FOUND states.</p>
+<div class="flex flex-wrap gap-xs mb-lg">
+<span class="font-code-sm text-code-sm text-primary px-xs py-1 border border-primary/20">RAG</span>
+<span class="font-code-sm text-code-sm text-primary px-xs py-1 border border-primary/20">Evidence</span>
+<span class="font-code-sm text-code-sm text-primary px-xs py-1 border border-primary/20">Documents</span>
+</div>
+<a class="font-label-caps text-secondary flex items-center gap-xs group-hover:gap-sm transition-all" href="case-studies/rag-evidence-first.html">Read case study <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<!-- Project 3 -->
+<div class="group relative bg-surface-container-lowest border border-white/5 p-gutter hover:bg-surface-container transition-colors">
+<h3 class="font-headline-lg text-[20px] text-on-surface mb-sm">Telegram + observability</h3>
+<p class="font-body-md text-on-surface-variant mb-lg">Secondary operational channel for testing the backend, with JSONL traces, token metrics, and latency/error status.</p>
+<div class="flex flex-wrap gap-xs mb-lg">
+<span class="font-code-sm text-code-sm text-primary px-xs py-1 border border-primary/20">Telegram</span>
+<span class="font-code-sm text-code-sm text-primary px-xs py-1 border border-primary/20">JSONL</span>
+<span class="font-code-sm text-code-sm text-primary px-xs py-1 border border-primary/20">Metrics</span>
+</div>
+<a class="font-label-caps text-secondary flex items-center gap-xs group-hover:gap-sm transition-all" href="case-studies/telegram-observability.html">Read case study <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+</div>
+</section>
+<!-- Execution Metrics: Code Dashboard -->
+<section class="py-xl" id="metrics">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-xl items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm">Execution metrics</h2>
+<p class="font-body-md text-on-surface-variant mb-md leading-relaxed">
+                        Every AI execution should leave an inspection record. The example below is synthetic and shows how the backend can record model, retrieval status, tokens, latency and result status.
+                    </p>
+<div class="flex gap-md">
+<div class="flex flex-col">
+<span class="text-primary font-headline-lg">1730ms</span>
+<span class="text-on-surface-variant font-label-caps">Latency</span>
+</div>
+<div class="flex flex-col">
+<span class="text-secondary font-headline-lg">19.4</span>
+<span class="text-on-surface-variant font-label-caps">Tokens/sec</span>
+</div>
+</div>
+</div>
+<div class="bg-[#080e17] p-md border border-white/5 relative group">
+<div class="absolute top-4 right-4 text-white/20 font-label-caps text-[10px]">JSONL_DEBUG_LOG</div>
+<pre class="font-code-sm text-code-sm overflow-x-auto text-[#4de6b1]">{
   "trace_id": "trc_public_demo_ok_001",
   "source": "telegram",
   "provider": "ollama",
@@ -255,52 +272,96 @@
   "output_tokens_per_second": 19.4,
   "status": "ok"
 }</pre>
-      </div>
-    </section>
-
-    <section class="section" id="stack" aria-labelledby="stack-title">
-      <h2 id="stack-title">Technical stack</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>Backend</h3>
-          <p>Python, FastAPI, HTTP contracts, payload validation, layered services and local APIs.</p>
-        </div>
-        <div class="card">
-          <h3>AI / LLM</h3>
-          <p>Document RAG, local models, provider adapters, prompt policies and model output checks.</p>
-        </div>
-        <div class="card">
-          <h3>Data</h3>
-          <p>JSON contracts, synthetic traces, retrieval metadata, document chunks and auditable response records.</p>
-        </div>
-        <div class="card">
-          <h3>Operations</h3>
-          <p>Latency, token counts, error states, JSON/JSONL logs and deterministic evals for drift detection.</p>
-        </div>
-        <div class="card">
-          <h3>Integrations</h3>
-          <p>Static web pages, Telegram bots and backend APIs used to test AI flows through real channels.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="limitations" aria-labelledby="limitations-title">
-      <h2 id="limitations-title">Current limitations</h2>
-      <div class="card">
-        <ul class="plain-list">
-          <li>Advanced prototype, not a production system.</li>
-          <li>Local experimental backend, not a deployment-ready platform yet.</li>
-          <li>Observability is local and JSON-based, not centralized production monitoring.</li>
-          <li>No public validation for high concurrency.</li>
-          <li>RAG quality depends on document quality, chunking and access-control design.</li>
-          <li>The public portfolio uses synthetic examples and does not expose private documents, logs or corpora.</li>
-        </ul>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">Static GitHub Pages portfolio. No dependencies and no sensitive data. <a href="ai-assisted-development.html">AI-assisted development</a>.</div>
-  </footer>
-</body>
-</html>
+</div>
+</div>
+</section>
+<!-- Technical Stack -->
+<section class="py-xl border-t border-white/5" id="stack">
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Technical stack</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Backend -->
+<div class="p-md bg-surface border border-white/5 hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-primary">terminal</span>
+<h4 class="font-label-caps text-on-surface">Backend</h4>
+</div>
+<p class="font-body-md text-on-surface-variant">Python, FastAPI, HTTP contracts, payload validation, layered services and local APIs.</p>
+</div>
+<!-- AI / LLM -->
+<div class="p-md bg-surface border border-white/5 hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-primary">neurology</span>
+<h4 class="font-label-caps text-on-surface">AI / LLM</h4>
+</div>
+<p class="font-body-md text-on-surface-variant">Document RAG, local models, provider adapters, prompt policies and model output checks.</p>
+</div>
+<!-- Data -->
+<div class="p-md bg-surface border border-white/5 hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-primary">database</span>
+<h4 class="font-label-caps text-on-surface">Data</h4>
+</div>
+<p class="font-body-md text-on-surface-variant">JSON contracts, synthetic traces, retrieval metadata, document chunks and auditable response records.</p>
+</div>
+<!-- Operations -->
+<div class="p-md bg-surface border border-white/5 hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-primary">monitoring</span>
+<h4 class="font-label-caps text-on-surface">Operations</h4>
+</div>
+<p class="font-body-md text-on-surface-variant">Latency, token counts, error states, JSON/JSONL logs and deterministic evals for drift detection.</p>
+</div>
+<!-- Integrations -->
+<div class="p-md bg-surface border border-white/5 hover:bg-surface-container-low transition-all">
+<div class="flex items-center gap-sm mb-sm">
+<span class="material-symbols-outlined text-primary">lan</span>
+<h4 class="font-label-caps text-on-surface">Integrations</h4>
+</div>
+<p class="font-body-md text-on-surface-variant">Static web pages, Telegram bots and backend APIs used to test AI flows through real channels.</p>
+</div>
+</div>
+</section>
+<!-- Current Status & Limitations -->
+<section class="py-xl mb-xl" id="limitations">
+<div class="bg-surface-container-low p-gutter border-l-4 border-secondary">
+<h3 class="font-headline-lg text-[24px] text-on-surface mb-md" id="status">Current limitations</h3>
+<ul class="space-y-sm">
+<li class="flex items-start gap-sm font-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-sm pt-1">warning</span>
+                        Advanced prototype; not a production system.
+                    </li>
+<li class="flex items-start gap-sm font-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-sm pt-1">warning</span>
+                        Local experimental backend, not a deployment-ready platform yet.
+                    </li>
+<li class="flex items-start gap-sm font-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-sm pt-1">warning</span>
+                        Observability is local and JSON-based, not centralized production monitoring.
+                    </li>
+<li class="flex items-start gap-sm font-body-md text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-sm pt-1">warning</span>
+                        No public validation for high concurrency.
+                    </li>
+</ul>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-[1200px] mx-auto px-gutter py-xl">
+<div class="flex flex-col items-center md:items-start gap-xs mb-md md:mb-0">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase">José González Oliva</div>
+<p class="font-code-sm text-code-sm text-on-surface-variant text-center md:text-left max-w-sm">
+                    Static GitHub Pages portfolio. No dependencies and no sensitive data. AI-assisted development.
+                </p>
+</div>
+<div class="flex gap-md font-code-sm text-code-sm text-secondary dark:text-secondary-fixed">
+<a class="hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="https://github.com/Josegodev">GitHub</a>
+<a class="hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="ai-assisted-development.html">AI note</a>
+<a class="hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="https://github.com/Josegodev/josegodev.github.io">Source</a>
+</div>
+</div>
+</footer>
+</body></html>
