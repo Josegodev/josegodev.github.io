@@ -1,54 +1,61 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Caso tecnico Web + Telegram + observabilidad.">
-  <title>Telegram y observabilidad | Caso tecnico</title>
+  <meta name="description" content="Case study: Telegram integration and operational observability with traces, tokens, latency and JSONL logs.">
+  <title>Telegram and observability | Case study</title>
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap nav">
       <a class="brand" href="../index.html">José González Oliva</a>
-      <nav class="nav-links" aria-label="Navegacion de casos">
-        <a href="../index.html#proyectos">Proyectos</a>
-        <a href="nucleo-runtime.html">NUCLEO</a>
+      <nav class="nav-links" aria-label="Case navigation">
+        <a href="../index.html#projects">Projects</a>
+        <a href="nucleo-runtime.html">Runtime</a>
         <a href="rag-evidence-first.html">RAG</a>
-        <a href="repo-maturity.html">Madurez</a>
+        <a href="repo-maturity.html">Maturity</a>
       </nav>
     </div>
   </header>
 
   <section class="case-header">
     <div class="wrap">
-      <p class="eyebrow">Caso tecnico</p>
-      <h1>Web + Telegram + observabilidad</h1>
-      <p class="subtitle">Telegram como canal operativo secundario para probar el backend con trazabilidad por ejecucion, control de errores y metricas utiles.</p>
+      <p class="eyebrow">Case study</p>
+      <h1>Telegram + observability</h1>
+      <p class="subtitle">Telegram used as a secondary operational channel to test a backend while preserving traces, metrics and error visibility.</p>
     </div>
   </section>
 
   <main class="wrap case-layout">
     <div>
       <section class="section">
-        <h2>Problema</h2>
-        <p>Las integraciones IA suelen fallar cuando no existe visibilidad sobre origen de la solicitud, proveedor/modelo usado, latencia, tokens, errores y estado de retrieval.</p>
+        <h2>Problem</h2>
+        <p>AI integrations become difficult to operate when teams cannot answer basic questions: which channel received the request, which model handled it, which evidence was used, how long it took and what failed.</p>
       </section>
 
       <section class="section">
-        <h2>Decision arquitectonica</h2>
-        <p>Usar Telegram como canal de prueba operativa conectado a un backend comun, registrar trazas JSONL por ejecucion y mantener el canal separado de la logica de modelo.</p>
+        <h2>Plain-English observability</h2>
+        <p>A trace is an execution record. It connects a request to the model, retrieval status, latency, token counts and errors. A `trace_id` is the identifier used to follow that execution across components.</p>
+        <p>Tokens are small pieces of text processed by the model. Tracking input and output tokens helps estimate cost, latency and model workload. Latency is the time the system takes to return a response.</p>
+        <p>JSONL means one JSON record per line. It is a simple local format for storing many execution records without needing a database or external monitoring service.</p>
       </section>
 
       <section class="section">
-        <h2>Flujo simplificado</h2>
+        <h2>Architectural decision</h2>
+        <p>Keep Telegram as a channel adapter, not as the core system. Telegram messages pass through bot logic into the backend, and the backend handles retrieval, provider calls, response generation and trace writing.</p>
+      </section>
+
+      <section class="section">
+        <h2>Simplified flow</h2>
         <div class="card">
-          <p>Mensaje Telegram -> parser/servicio bot -> API backend -> RAG/proveedor LLM -> respuesta -> trace_id + JSONL con metricas y estado.</p>
+          <p>Telegram message -> bot service -> backend API -> optional RAG -> LLM provider -> response -> JSONL trace.</p>
         </div>
       </section>
 
       <section class="section">
-        <h2>Traza sintetica</h2>
+        <h2>Synthetic trace</h2>
         <div class="metric-block">
 <pre>{
   "trace_id": "trc_public_demo_ok_001",
@@ -64,45 +71,39 @@
       </section>
 
       <section class="section">
-        <h2>Que demuestra</h2>
-        <p>Capacidad para integrar IA en canales reales sin perder control operativo, manteniendo trazabilidad y separacion entre interfaz, backend, retrieval y modelo.</p>
-        <p>No se publican `user_id`, `chat_id`, texto de usuarios, tokens ni logs reales.</p>
+        <h2>What it demonstrates</h2>
+        <p>Ability to connect AI behavior to operational evidence: channel, model, retrieval status, token workload, latency and error state. No real user identifiers, chat identifiers, user text, tokens or logs are published.</p>
       </section>
 
       <section class="section">
         <h2>Stack</h2>
-        <p>FastAPI, Telegram Bot API, HTML/CSS, JSON logs, Docker, modelos locales segun disponibilidad.</p>
+        <p>FastAPI, Telegram Bot API, JSON/JSONL traces, local model providers, synthetic examples and deterministic evaluation scripts.</p>
       </section>
 
       <section class="section">
-        <h2>Estado actual</h2>
-        <p><span class="status">Experimental.</span> Flujo preparado para pruebas locales e iteracion de metricas antes de endurecer despliegue.</p>
-      </section>
-
-      <section class="section">
-        <h2>Limitaciones</h2>
+        <h2>Limitations</h2>
         <ul class="plain-list">
-          <li>No incluye gestion avanzada de colas.</li>
-          <li>Sin SLOs formales ni panel externo de observabilidad.</li>
-          <li>El coste se estima segun metrica disponible y puede ser cero en modelos locales.</li>
-          <li>Observabilidad local basada en JSON/JSONL, no centralizada.</li>
+          <li>No advanced queue management.</li>
+          <li>No formal SLOs or external observability dashboard.</li>
+          <li>Local JSONL logging is useful for a lab, but not a replacement for production monitoring.</li>
+          <li>Cost and token metrics depend on what the selected provider returns.</li>
         </ul>
       </section>
     </div>
 
     <aside class="card case-nav">
-      <h3>Navegacion</h3>
+      <h3>Navigation</h3>
       <ul class="plain-list">
-        <li><a href="../index.html">Volver a inicio</a></li>
-        <li><a href="nucleo-runtime.html">NUCLEO runtime</a></li>
-        <li><a href="rag-evidence-first.html">RAG evidence-first</a></li>
-        <li><a href="repo-maturity.html">Madurez del repo</a></li>
+        <li><a href="../index.html">Back home</a></li>
+        <li><a href="nucleo-runtime.html">Controlled runtime</a></li>
+        <li><a href="rag-evidence-first.html">Evidence-first RAG</a></li>
+        <li><a href="repo-maturity.html">Repository maturity</a></li>
       </ul>
     </aside>
   </main>
 
   <footer class="footer">
-    <div class="wrap">Caso sin datos sensibles ni referencias privadas.</div>
+    <div class="wrap">Synthetic observability examples only.</div>
   </footer>
 </body>
 </html>

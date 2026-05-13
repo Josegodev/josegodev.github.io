@@ -1,41 +1,50 @@
-# Portfolio AI - José González Oliva
+# AI Portfolio - José González Oliva
 
-Portfolio tecnico estatico para GitHub Pages, orientado a reclutadores y perfiles tecnicos que quieran evaluar experiencia en backend, IA aplicada, RAG, observabilidad, integraciones y automatizacion.
+Static technical portfolio for GitHub Pages, aimed at recruiters and technical reviewers evaluating Backend & AI Engineering work around FastAPI, RAG, LLM providers, Telegram integration, JSON traces, evaluation and operational observability.
 
-Este repositorio es una vista publica, curada y segura de trabajo realizado en repositorios y laboratorios privados/locales. No publica codigo fuente privado, corpus documental real, logs reales, tokens, IPs privadas ni rutas locales.
+This repository is a public, curated and safe view of work developed in private or local repositories and labs. It does not publish private source code, real document corpora, real logs, tokens, private IPs, local paths, credentials or confidential documentation.
 
-El sitio no usa frameworks, dependencias, npm ni datos sensibles. Esta construido solo con HTML, CSS y muestras JSON sinteticas.
+The site is static. It uses only HTML, CSS and synthetic JSON examples. There is no React, Astro, Vite, npm, build step or external dependency.
 
-## Publicacion en GitHub Pages
+## GitHub Pages
 
-1. Sube este repositorio a GitHub.
-2. Entra en `Settings`.
-3. Abre `Pages`.
-4. En `Build and deployment`, selecciona `Deploy from a branch`.
-5. Selecciona la rama `main`.
-6. Selecciona la carpeta `/docs`.
-7. Guarda la configuracion.
+This repository is intended to be served as the user site `josegodev.github.io`.
 
-GitHub publicara el contenido de `docs/index.html` como pagina principal.
+Recommended GitHub Pages setup:
 
-## Contenido
+1. Open the repository settings in GitHub.
+2. Go to `Pages`.
+3. In `Build and deployment`, choose `Deploy from a branch`.
+4. Select branch `main`.
+5. Select folder `/root`.
+6. Save.
 
-- `docs/index.html`: pagina principal del portfolio.
-- `docs/styles.css`: estilos responsive del sitio.
-- `docs/.nojekyll`: evita procesamiento Jekyll en GitHub Pages.
-- `docs/case-studies/`: paginas de casos tecnicos.
-- `samples/`: trazas y ejemplos RAG sinteticos sin datos sensibles.
+GitHub Pages will serve `index.html` from the repository root.
 
-## Como editar
+## Content
 
-- Cambia textos principales en `docs/index.html`.
-- Edita cada caso en `docs/case-studies/*.html`.
-- Ajusta colores, espaciados y responsive en `docs/styles.css`.
-- Actualiza ejemplos tecnicos en `samples/*.json`.
+- `index.html`: main portfolio page.
+- `styles.css`: shared static styles.
+- `case-studies/`: technical case studies.
+- `ai-assisted-development.html`: transparency note about AI-assisted development.
+- `samples/`: synthetic JSON examples.
+- `docs/`: synchronized copy kept for compatibility if GitHub Pages is ever configured from `/docs`.
 
-Mantener el portfolio creible:
+## Editing
 
-- No incluir tokens, credenciales, IPs privadas ni rutas locales reales.
-- No publicar nombres de clientes, documentacion contractual, corpus privado, SQLite real, logs reales ni trazas con identificadores reales.
-- No afirmar produccion, alta concurrencia, cloud productivo o seguridad enterprise si no hay evidencia publica reproducible.
-- Usar ejemplos sinteticos y explicar las limitaciones actuales.
+- Edit root files first because the public site is served from root.
+- Keep `/docs` synchronized only if it remains in the repository.
+- Keep examples synthetic.
+- Do not publish private logs, real traces, corpora, SQLite files, tokens, credentials, local paths, private IPs, customer data or confidential documentation.
+
+## Maturity framing
+
+The portfolio intentionally presents the work as:
+
+- advanced prototype
+- local experimental backend
+- curated demo
+- not production-ready
+- not deployment-ready yet
+
+Do not add claims about production cloud operation, enterprise security or high-concurrency readiness unless there is public, reproducible evidence.

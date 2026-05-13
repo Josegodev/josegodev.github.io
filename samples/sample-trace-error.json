@@ -14,6 +14,6 @@
   "error_code": "policy_block",
   "error": {
     "type": "policy_block",
-    "message": "La respuesta requiere evidencia documental no disponible en el contexto recuperado."
+    "message": "The answer requires document evidence that is not available in the retrieved context."
   }
 }

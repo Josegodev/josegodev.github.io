@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portfolio tecnico de José González Oliva, Backend & AI Engineer especializado en FastAPI, RAG, proveedores LLM, Telegram, observabilidad JSON y evals.">
+  <meta name="description" content="Technical portfolio of José González Oliva, Backend & AI Engineer focused on FastAPI, RAG, LLM providers, Telegram integration, JSON traces, evaluation and operational observability.">
   <title>José González Oliva | Backend & AI Engineer</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,12 +11,12 @@
   <header class="site-header">
     <div class="wrap nav">
       <a class="brand" href="index.html">José González Oliva</a>
-      <nav class="nav-links" aria-label="Navegacion principal">
-        <a href="#proyectos">Proyectos</a>
-        <a href="#metricas">Metricas</a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#projects">Projects</a>
+        <a href="#metrics">Metrics</a>
         <a href="#stack">Stack</a>
-        <a href="#estado">Estado</a>
-        <a href="#limitaciones">Limitaciones</a>
+        <a href="#status">Status</a>
+        <a href="#limitations">Limitations</a>
       </nav>
     </div>
   </header>
@@ -25,90 +25,150 @@
     <div class="wrap">
       <p class="eyebrow">Backend & AI Engineer</p>
       <h1>José González Oliva</h1>
-      <p class="subtitle">Construyo backends IA trazables, reproducibles y operables: sistemas donde el modelo es una pieza sustituible y el backend mantiene contratos, trazabilidad y control operativo.</p>
-      <p class="tagline">FastAPI · RAG · LLMOps · Observabilidad · Automatizacion</p>
+      <p class="subtitle">I build traceable, reproducible and operable AI backends. The model is not the whole system; it is a replaceable component inside a backend that owns contracts, evidence, policies, traces and evaluation.</p>
+      <p class="tagline">FastAPI · RAG · LLMOps · Observability · Automation</p>
       <div class="actions">
-        <a class="button primary" href="#proyectos">Ver proyectos</a>
-        <a class="button" href="#metricas">Ver traza JSON</a>
+        <a class="button primary" href="#projects">View projects</a>
+        <a class="button" href="#terms">Technical terms</a>
       </div>
     </div>
   </section>
 
   <main class="wrap">
-    <section class="section" aria-labelledby="resumen">
-      <h2 id="resumen">Resumen</h2>
-      <p>Mi foco es construir sistemas IA operables, no solo chatbots: runtimes locales con FastAPI, RAG documental, proveedores LLM intercambiables, integracion Telegram y trazabilidad JSON por ejecucion.</p>
-      <p>El valor tecnico esta en controlar el flujo completo: entrada, contrato, retrieval, proveedor de modelo, respuesta, metricas, errores y evidencia. El modelo puede cambiar; el runtime mantiene las reglas.</p>
+    <section class="section" aria-labelledby="what-i-build">
+      <h2 id="what-i-build">What I build</h2>
+      <p>I focus on AI systems that can be inspected, tested and operated, not just prompt demos. My work combines FastAPI backends, document retrieval, local or cloud model providers, Telegram integration, JSON execution records and deterministic evaluation.</p>
+      <p>The engineering goal is control: what entered the system, which documents were retrieved, which model was used, how long it took, how many tokens were processed, what failed and whether the answer had enough evidence.</p>
+    </section>
+
+    <section class="section narrative" aria-labelledby="background">
+      <p class="eyebrow">Background</p>
+      <h2 id="background">From aerospace systems to local AI</h2>
+      <div class="card narrative-card">
+        <p class="lead">I am an engineer with experience in demanding industrial and aerospace systems. I have worked as a manufacturing engineer in critical environments linked to Airbus and Indra, where traceability, technical documentation, process validation and error control are not optional.</p>
+        <p>That background gives me a practical view of why introducing AI into productive systems is difficult: integration with existing processes, quality control, provider dependency, missing traceability, error handling, operational cost, documentation and long-term maintainability.</p>
+        <p>From that perspective I develop NUCLEO, a research and engineering line focused on controlled, traceable and reproducible AI backends. The core idea is that the model should not be the entire system, but one replaceable component inside an architecture with contracts, policies, observability, document retrieval and evaluation.</p>
+        <p>As part of that work I maintain LOCALES, a local lab used to test FastAPI, local models, document RAG, Telegram integration, JSON traces, per-execution metrics and separation between runtime, LLM provider and application layer.</p>
+        <p>The objective is not to create another chatbot. It is to explore how generative AI can move toward systems that are measurable, debuggable, auditable and adaptable to real environments.</p>
+      </div>
+    </section>
+
+    <section class="section" id="terms" aria-labelledby="terms-title">
+      <h2 id="terms-title">Technical terms, in plain English</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>LLM</h3>
+          <p>A Large Language Model is a probabilistic model that predicts likely text from training patterns and the context it receives. Because it is probabilistic, it can produce fluent but incorrect answers.</p>
+        </div>
+        <div class="card">
+          <h3>RAG</h3>
+          <p>Retrieval-Augmented Generation retrieves relevant information from a controlled document base before asking the model to answer. It grounds answers in available documents; it does not simply make the AI smarter.</p>
+        </div>
+        <div class="card">
+          <h3>JSON contracts</h3>
+          <p>JSON is a structured text format for predictable instructions, configuration, requests, responses and execution records. Here, JSON structures are contracts between components, not informal notes.</p>
+        </div>
+        <div class="card">
+          <h3>Trace / trace_id</h3>
+          <p>A trace is an execution record. It helps answer what was asked, through which channel, using which model, with which evidence, how long it took, how many tokens were used and what failed.</p>
+        </div>
+        <div class="card">
+          <h3>Hallucinations</h3>
+          <p>A hallucination is a confident-sounding answer that is not properly supported by evidence. The goal is not to claim they disappear, but to make them easier to detect, reduce and evaluate.</p>
+        </div>
+        <div class="card">
+          <h3>Tokens</h3>
+          <p>Tokens are small pieces of text processed by the model. Tracking input and output tokens helps estimate cost, latency and workload.</p>
+        </div>
+        <div class="card">
+          <h3>Runtime</h3>
+          <p>The runtime is the controlled execution layer around the model. It decides how requests are handled, how policies are applied, how tools are called and how the result is traced.</p>
+        </div>
+        <div class="card">
+          <h3>Provider adapter</h3>
+          <p>A provider adapter lets the backend talk to different model providers, such as a local model server or a cloud API, without rewriting the whole application.</p>
+        </div>
+      </div>
     </section>
 
     <section class="section" aria-labelledby="roles">
-      <h2 id="roles">Roles objetivo</h2>
+      <h2 id="roles">Target roles</h2>
       <div class="card">
         <ul class="role-list">
-          <li>Backend Developer con IA</li>
+          <li>Backend Developer with AI</li>
           <li>AI Engineer</li>
-          <li>LLMOps / AIOps inicial</li>
+          <li>Early LLMOps / AIOps</li>
           <li>Automation Engineer</li>
           <li>Product AI Engineer</li>
         </ul>
       </div>
     </section>
 
-    <section class="section narrative" aria-labelledby="trayectoria">
-      <p class="eyebrow">Presentacion</p>
-      <h2 id="trayectoria">Del espacio a la IA local</h2>
-      <div class="card narrative-card">
-        <p class="lead">Soy ingeniero con experiencia en sistemas industriales y aeroespaciales de alta exigencia. He trabajado como ingeniero de fabricacion en entornos criticos vinculados a Airbus e Indra, donde la trazabilidad, la documentacion tecnica, la validacion de procesos y el control de errores no son opcionales.</p>
-        <p>Esa experiencia me ha dado una vision practica de las dificultades reales que aparecen al introducir IA en sistemas existentes: integracion con procesos, control de calidad, dependencia de proveedores, falta de trazabilidad, gestion de errores, coste operacional y resistencia a convertir prototipos en herramientas mantenibles.</p>
-        <p>Desde esa perspectiva desarrollo NUCLEO, una linea de trabajo centrada en construir backends IA controlados, trazables y reproducibles. La idea principal es que el modelo no sea el sistema completo, sino una pieza sustituible dentro de una arquitectura con contratos, politicas, observabilidad, recuperacion documental y evaluacion.</p>
-        <p>Como parte de esa investigacion mantengo un laboratorio local, LOCALES, donde pruebo modelos locales, RAG documental, FastAPI, Telegram, trazas JSON, metricas por ejecucion y separacion entre runtime, proveedor LLM y capa de aplicacion.</p>
-        <p>El objetivo no es crear otro chatbot, sino explorar como llevar la IA generativa hacia sistemas operables: medibles, depurables, auditables y adaptables a entornos reales.</p>
+    <section class="section" id="status" aria-labelledby="status-title">
+      <h2 id="status-title">Real maturity status</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Advanced prototype</h3>
+          <p>The system demonstrates contracts, RAG, provider adapters, Telegram integration, JSON traces and evals, but remains a research and engineering prototype.</p>
+        </div>
+        <div class="card">
+          <h3>Local experimental backend</h3>
+          <p>The backend is designed for local experimentation and technical validation, not for public production traffic.</p>
+        </div>
+        <div class="card">
+          <h3>Curated demo</h3>
+          <p>The public portfolio shows synthetic examples and architecture decisions. It does not publish private corpora, real logs or local artifacts.</p>
+        </div>
+        <div class="card">
+          <h3>Not deployment-ready yet</h3>
+          <p>It still needs reproducible packaging, root dependency files, a minimal Dockerfile, parameterized URLs and extended healthchecks.</p>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="proyectos" aria-labelledby="proyectos-title">
-      <h2 id="proyectos-title">Proyectos principales</h2>
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <h2 id="projects-title">Main projects</h2>
       <div class="grid">
         <article class="card">
-          <h3>Runtime local IA controlado</h3>
-          <p>Backend FastAPI con contratos, servicios de bot/backend, adapters de proveedor y trazabilidad por ejecucion.</p>
-          <a href="case-studies/nucleo-runtime.html">Leer caso</a>
+          <h3>Controlled local AI runtime</h3>
+          <p>FastAPI backend with explicit request/response contracts, bot/backend services, provider adapters and per-execution traceability.</p>
+          <a href="case-studies/nucleo-runtime.html">Read case study</a>
           <div class="pill-row">
-          <span class="pill">FastAPI</span>
-            <span class="pill">Adapters</span>
+            <span class="pill">FastAPI</span>
+            <span class="pill">Runtime</span>
             <span class="pill">Tracing</span>
           </div>
         </article>
         <article class="card">
-          <h3>RAG documental evidence-first</h3>
-          <p>Flujo RAG orientado a estados EVIDENCE_FOUND / NO_EVIDENCE y a respuestas basadas en evidencia recuperada.</p>
-          <a href="case-studies/rag-evidence-first.html">Leer caso</a>
+          <h3>Evidence-first document RAG</h3>
+          <p>A RAG flow that checks whether evidence exists before asking the model to answer, with explicit EVIDENCE_FOUND / NO_EVIDENCE states.</p>
+          <a href="case-studies/rag-evidence-first.html">Read case study</a>
           <div class="pill-row">
             <span class="pill">RAG</span>
-            <span class="pill">Chunking</span>
-            <span class="pill">Evidencia</span>
+            <span class="pill">Evidence</span>
+            <span class="pill">Documents</span>
           </div>
         </article>
         <article class="card">
-          <h3>Web + Telegram + observabilidad</h3>
-          <p>Telegram como canal operativo secundario para probar el backend, con trazas JSONL, tokens, latencia y errores.</p>
-          <a href="case-studies/telegram-observability.html">Leer caso</a>
+          <h3>Telegram + observability</h3>
+          <p>Telegram as a secondary operational channel for testing the backend, with JSONL traces, token metrics, latency and error status.</p>
+          <a href="case-studies/telegram-observability.html">Read case study</a>
           <div class="pill-row">
             <span class="pill">Telegram</span>
-            <span class="pill">JSON Logs</span>
-            <span class="pill">Docker</span>
+            <span class="pill">JSONL</span>
+            <span class="pill">Metrics</span>
           </div>
         </article>
       </div>
       <div class="actions">
-        <a class="button" href="case-studies/repo-maturity.html">Ver madurez tecnica</a>
+        <a class="button" href="case-studies/repo-maturity.html">View technical maturity</a>
       </div>
     </section>
 
-    <section class="section" id="metricas" aria-labelledby="metricas-title">
-      <h2 id="metricas-title">Metricas por ejecucion</h2>
-      <p>Cada ejecucion debe poder inspeccionarse sin depender de memoria conversacional ni logs opacos.</p>
-      <div class="metric-block" aria-label="Ejemplo de traza JSON">
+    <section class="section" id="metrics" aria-labelledby="metrics-title">
+      <h2 id="metrics-title">Execution metrics</h2>
+      <p>Every AI execution should leave an inspection record. The example below is synthetic and shows how the backend can record model, retrieval status, tokens, latency and result status.</p>
+      <div class="metric-block" aria-label="Synthetic JSON trace example">
 <pre>{
   "trace_id": "trc_public_demo_ok_001",
   "source": "telegram",
@@ -125,70 +185,48 @@
     </section>
 
     <section class="section" id="stack" aria-labelledby="stack-title">
-      <h2 id="stack-title">Stack tecnico</h2>
+      <h2 id="stack-title">Technical stack</h2>
       <div class="grid two">
         <div class="card">
           <h3>Backend</h3>
-          <p>Python, FastAPI, contratos HTTP, validacion de payloads, separacion por capas y servicios operables.</p>
+          <p>Python, FastAPI, HTTP contracts, payload validation, layered services and local APIs.</p>
         </div>
         <div class="card">
-          <h3>IA / LLM</h3>
-          <p>RAG documental, proveedores Ollama/OpenAI, modelos locales cuando aplica, prompts versionables y politicas de respuesta.</p>
+          <h3>AI / LLM</h3>
+          <p>Document RAG, local models, provider adapters, prompt policies and model output checks.</p>
         </div>
         <div class="card">
-          <h3>Datos</h3>
-          <p>JSON, trazas de ejecucion, metadatos de retrieval, chunking documental y salidas auditables.</p>
+          <h3>Data</h3>
+          <p>JSON contracts, synthetic traces, retrieval metadata, document chunks and auditable response records.</p>
         </div>
         <div class="card">
-          <h3>Operacion</h3>
-          <p>Trazas JSON/JSONL, medicion de latencia, tokens, errores, coste estimado y evals deterministas para detectar drift.</p>
+          <h3>Operations</h3>
+          <p>Latency, token counts, error states, JSON/JSONL logs and deterministic evals for drift detection.</p>
         </div>
         <div class="card">
-          <h3>Frontend / Integraciones</h3>
-          <p>HTML, CSS, interfaces web simples, bots de Telegram y APIs para conectar sistemas existentes.</p>
+          <h3>Integrations</h3>
+          <p>Static web pages, Telegram bots and backend APIs used to test AI flows through real channels.</p>
         </div>
       </div>
     </section>
 
-    <section class="section" id="estado" aria-labelledby="estado-title">
-      <h2 id="estado-title">Estado real</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>Maduro para explicar</h3>
-          <p>Prototipo avanzado y backend local experimental con contratos, RAG, adapters de proveedor, Telegram, trazas JSON y evals.</p>
-        </div>
-        <div class="card">
-          <h3>Demo curada</h3>
-          <p>Presentable para reclutadores si se usan ejemplos sinteticos y se separa claramente runtime, laboratorio y artefactos privados.</p>
-        </div>
-        <div class="card">
-          <h3>No deployment-ready</h3>
-          <p>Faltan empaquetado reproducible, requirements raiz, Dockerfile minimo, parametrizacion completa y healthchecks ampliados.</p>
-        </div>
-        <div class="card">
-          <h3>No production-ready</h3>
-          <p>No hay validacion publica de alta concurrencia, observabilidad centralizada, hardening productivo ni corpus RAG publicable.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="limitaciones" aria-labelledby="limitaciones-title">
-      <h2 id="limitaciones-title">Limitaciones actuales</h2>
+    <section class="section" id="limitations" aria-labelledby="limitations-title">
+      <h2 id="limitations-title">Current limitations</h2>
       <div class="card">
         <ul class="plain-list">
-          <li>Proyecto experimental.</li>
-          <li>Observabilidad local basada en JSON.</li>
-          <li>Sin alta concurrencia validada.</li>
-          <li>Cloud en fase de estudio.</li>
-          <li>RAG dependiente de calidad documental y estrategia de chunking.</li>
-          <li>El repositorio publico muestra una vista curada, no artefactos privados ni logs reales.</li>
+          <li>Advanced prototype, not a production system.</li>
+          <li>Local experimental backend, not a deployment-ready platform yet.</li>
+          <li>Observability is local and JSON-based, not centralized production monitoring.</li>
+          <li>No public validation for high concurrency.</li>
+          <li>RAG quality depends on document quality, chunking and access-control design.</li>
+          <li>The public portfolio uses synthetic examples and does not expose private documents, logs or corpora.</li>
         </ul>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="wrap">Portfolio estatico para GitHub Pages. Sin dependencias y sin datos sensibles. <a href="ai-assisted-development.html">Desarrollo asistido por IA</a>.</div>
+    <div class="wrap">Static GitHub Pages portfolio. No dependencies and no sensitive data. <a href="ai-assisted-development.html">AI-assisted development</a>.</div>
   </footer>
 </body>
 </html>

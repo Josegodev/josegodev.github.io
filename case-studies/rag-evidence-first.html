@@ -1,57 +1,69 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Caso tecnico RAG documental evidence-first.">
-  <title>RAG evidence-first | Caso tecnico</title>
+  <meta name="description" content="Case study: evidence-first document RAG with explicit evidence status and synthetic examples.">
+  <title>Evidence-first document RAG | Case study</title>
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap nav">
       <a class="brand" href="../index.html">José González Oliva</a>
-      <nav class="nav-links" aria-label="Navegacion de casos">
-        <a href="../index.html#proyectos">Proyectos</a>
-        <a href="nucleo-runtime.html">NUCLEO</a>
+      <nav class="nav-links" aria-label="Case navigation">
+        <a href="../index.html#projects">Projects</a>
+        <a href="nucleo-runtime.html">Runtime</a>
         <a href="telegram-observability.html">Telegram</a>
-        <a href="repo-maturity.html">Madurez</a>
+        <a href="repo-maturity.html">Maturity</a>
       </nav>
     </div>
   </header>
 
   <section class="case-header">
     <div class="wrap">
-      <p class="eyebrow">Caso tecnico</p>
-      <h1>RAG documental evidence-first</h1>
-      <p class="subtitle">Recuperacion documental con estados explicitos EVIDENCE_FOUND / NO_EVIDENCE y respuestas condicionadas por evidencia.</p>
+      <p class="eyebrow">Case study</p>
+      <h1>Evidence-first document RAG</h1>
+      <p class="subtitle">A document retrieval flow designed to check whether evidence exists before asking the model to answer.</p>
     </div>
   </section>
 
   <main class="wrap case-layout">
     <div>
       <section class="section">
-        <h2>Problema</h2>
-        <p>Un LLM puede responder de forma convincente aunque la base documental no soporte la respuesta. En contextos tecnicos, esto reduce confianza y aumenta el riesgo operativo.</p>
+        <h2>Problem</h2>
+        <p>An LLM can generate confident text even when the available documents do not support the answer. This is a hallucination risk: the answer may sound correct but lack evidence.</p>
       </section>
 
       <section class="section">
-        <h2>Decision arquitectonica</h2>
-        <p>Priorizar retrieval, evidencia y estado de recuperacion antes de redactar. Si el estado es `NO_EVIDENCE`, la respuesta debe declarar la limitacion en lugar de completar con suposiciones.</p>
+        <h2>What RAG means here</h2>
+        <p>RAG means Retrieval-Augmented Generation. Before asking the model to answer, the system retrieves relevant information from a controlled document base. The model is then expected to answer using that retrieved evidence.</p>
+        <p>RAG is not described here as making the AI smarter. It is an engineering pattern for grounding answers in available documents and making the evidence path easier to inspect.</p>
       </section>
 
       <section class="section">
-        <h2>Flujo simplificado</h2>
+        <h2>Critical-information nuance</h2>
+        <p>In sensitive or critical environments, RAG may retrieve controlled operational information. That makes access control, source tracking, logging, document boundaries and evidence status part of the engineering problem.</p>
+        <p>The real corpus is not published. This portfolio uses synthetic examples to show behavior without exposing private or confidential material.</p>
+      </section>
+
+      <section class="section">
+        <h2>Architectural decision</h2>
+        <p>Make retrieval status explicit. If the system finds relevant evidence, the state is `EVIDENCE_FOUND`. If the system does not have enough evidence, the state is `NO_EVIDENCE` and the response should not invent missing details.</p>
+      </section>
+
+      <section class="section">
+        <h2>Simplified flow</h2>
         <div class="card">
-          <p>Consulta -> normalizacion -> busqueda documental -> seleccion de chunks -> estado EVIDENCE_FOUND / NO_EVIDENCE -> respuesta con evidencia o marcador de no-evidencia.</p>
+          <p>Question -> document search -> chunk selection -> evidence status -> answer with evidence or no-evidence response.</p>
         </div>
       </section>
 
       <section class="section">
-        <h2>Ejemplo sintetico</h2>
+        <h2>Synthetic example</h2>
         <div class="metric-block">
 <pre>{
-  "query": "Que componentes intervienen en una ejecucion trazable?",
+  "query": "Which components are involved in a traceable execution?",
   "retrieval_status": "EVIDENCE_FOUND",
   "chunks": [
     {
@@ -66,45 +78,34 @@
       </section>
 
       <section class="section">
-        <h2>Que demuestra</h2>
-        <p>Criterio para construir IA documental con control de alucinaciones, trazabilidad de fuentes y comportamiento explicito ante informacion insuficiente.</p>
-        <p>El corpus real no se publica. Para portfolio se usan ejemplos sinteticos que muestran contrato y comportamiento, no contenido privado.</p>
+        <h2>What it demonstrates</h2>
+        <p>Engineering focus on reducing and evaluating hallucination risk through evidence retrieval, explicit states, traces, contracts and output checks. It does not claim hallucinations are fully eliminated.</p>
       </section>
 
       <section class="section">
         <h2>Stack</h2>
-        <p>Python, FastAPI, JSON, embeddings, chunking documental, modelos locales, contratos de respuesta.</p>
+        <p>Python, FastAPI, document chunks, retrieval metadata, JSON records, local model providers and synthetic demo evidence.</p>
       </section>
 
       <section class="section">
-        <h2>Estado actual</h2>
-        <p><span class="status">Experimental.</span> Flujo local orientado a validacion de arquitectura, calidad de chunking y trazabilidad de recuperacion.</p>
-      </section>
-
-      <section class="section">
-        <h2>Limitaciones</h2>
-        <ul class="plain-list">
-          <li>La calidad depende de los documentos de entrada.</li>
-          <li>El chunking requiere ajuste por dominio.</li>
-          <li>No incluye evaluacion automatica extensa de precision de retrieval.</li>
-          <li>La demo publica no incluye el SQLite ni corpus privados originales.</li>
-        </ul>
+        <h2>Current status</h2>
+        <p><span class="status">Experimental.</span> Useful as a local architecture and behavior validation flow, not as a published production RAG platform.</p>
       </section>
     </div>
 
     <aside class="card case-nav">
-      <h3>Navegacion</h3>
+      <h3>Navigation</h3>
       <ul class="plain-list">
-        <li><a href="../index.html">Volver a inicio</a></li>
-        <li><a href="nucleo-runtime.html">NUCLEO runtime</a></li>
-        <li><a href="telegram-observability.html">Telegram + observabilidad</a></li>
-        <li><a href="repo-maturity.html">Madurez del repo</a></li>
+        <li><a href="../index.html">Back home</a></li>
+        <li><a href="nucleo-runtime.html">Controlled runtime</a></li>
+        <li><a href="telegram-observability.html">Telegram + observability</a></li>
+        <li><a href="repo-maturity.html">Repository maturity</a></li>
       </ul>
     </aside>
   </main>
 
   <footer class="footer">
-    <div class="wrap">Caso sin datos sensibles ni referencias privadas.</div>
+    <div class="wrap">No private corpus, logs or controlled documents are published.</div>
   </footer>
 </body>
 </html>
