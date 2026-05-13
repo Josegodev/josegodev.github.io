@@ -1,0 +1,21 @@
+{
+  "query": "Que componentes intervienen en una ejecucion trazable?",
+  "retrieval_status": "EVIDENCE_FOUND",
+  "top_k": 2,
+  "chunks": [
+    {
+      "chunk_id": 101,
+      "source": "public-demo/runtime-overview.md",
+      "score": 4,
+      "excerpt": "El backend recibe una solicitud, valida el contrato, selecciona el proveedor y registra una traza por ejecucion."
+    },
+    {
+      "chunk_id": 104,
+      "source": "public-demo/observability.md",
+      "score": 3,
+      "excerpt": "La traza incluye trace_id, estado RAG, latencia, tokens de entrada y salida, y codigo de error cuando aplica."
+    }
+  ],
+  "answer_policy": "Responder solo con evidencia recuperada. Si no hay evidencia suficiente, devolver NO_EVIDENCE_FOR_ANSWER.",
+  "published_corpus": "synthetic_demo_only"
+}

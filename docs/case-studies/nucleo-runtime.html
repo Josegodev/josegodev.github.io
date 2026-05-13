@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Caso tecnico NUCLEO: runtime backend para agentes IA controlados.">
-  <title>NUCLEO Runtime | Caso tecnico</title>
+  <meta name="description" content="Caso tecnico: runtime local IA controlado con FastAPI, RAG, adapters LLM y trazabilidad JSON.">
+  <title>Runtime local IA controlado | Caso tecnico</title>
   <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -15,6 +15,7 @@
         <a href="../index.html#proyectos">Proyectos</a>
         <a href="rag-evidence-first.html">RAG</a>
         <a href="telegram-observability.html">Telegram</a>
+        <a href="repo-maturity.html">Madurez</a>
       </nav>
     </div>
   </header>
@@ -22,8 +23,8 @@
   <section class="case-header">
     <div class="wrap">
       <p class="eyebrow">Caso tecnico</p>
-      <h1>NUCLEO — Runtime backend para agentes IA controlados</h1>
-      <p class="subtitle">Separacion entre modelo, runtime, contratos, politicas y herramientas para evitar acoplamientos dificiles de operar.</p>
+      <h1>Runtime local IA controlado</h1>
+      <p class="subtitle">Vista publica curada de un backend IA local basado en FastAPI, RAG opcional, adapters de proveedor y trazabilidad JSON.</p>
     </div>
   </section>
 
@@ -36,29 +37,34 @@
 
       <section class="section">
         <h2>Decision arquitectonica</h2>
-        <p>Diseñar un runtime backend con API FastAPI, contratos de entrada y salida, politicas explicitas, seleccion de modelo desacoplada y trazas por ejecucion.</p>
+        <p>Diseñar un runtime backend donde FastAPI mantiene contratos, servicios y trazabilidad; el modelo se consume mediante adapters intercambiables y no decide acciones operativas.</p>
       </section>
 
       <section class="section">
         <h2>Flujo simplificado</h2>
         <div class="card">
-          <p>Solicitud HTTP -> validacion -> politica -> seleccion de modelo -> herramientas opcionales -> respuesta -> traza JSON.</p>
+          <p>Request / Telegram / API -> FastAPI -> servicio bot/backend -> RAG opcional -> provider adapter -> respuesta -> trace JSON.</p>
         </div>
       </section>
 
       <section class="section">
+        <h2>Vista curada</h2>
+        <p>El sistema fuente contiene varios componentes y laboratorios. Este caso publica solo la arquitectura defendible: runtime local, contratos, adapters, RAG y trazabilidad. No se publican corpus privados, rutas locales, tokens, logs reales ni artefactos de ejecucion.</p>
+      </section>
+
+      <section class="section">
         <h2>Que demuestra</h2>
-        <p>Capacidad para convertir un prototipo IA en un backend inspeccionable, con puntos claros de control, metricas y errores analizables.</p>
+        <p>Capacidad para convertir un prototipo IA en un backend inspeccionable, con puntos claros de control, metricas, errores analizables y proveedores LLM sustituibles.</p>
       </section>
 
       <section class="section">
         <h2>Stack</h2>
-        <p>Python, FastAPI, JSON, Docker, Ollama / LM Studio como runtimes locales de modelo.</p>
+        <p>Python, FastAPI, Pydantic, JSON logs, Telegram API, RAG SQLite, Ollama/OpenAI adapters y scripts de evaluacion local.</p>
       </section>
 
       <section class="section">
         <h2>Estado actual</h2>
-        <p><span class="status">Experimental.</span> Base funcional para iterar contratos, politicas, trazabilidad y ejecucion local.</p>
+        <p><span class="status">Experimental.</span> Backend local avanzado y demo presentable con curacion. No se presenta como despliegue productivo.</p>
       </section>
 
       <section class="section">
@@ -67,6 +73,7 @@
           <li>Sin validacion de alta concurrencia.</li>
           <li>Persistencia de observabilidad basada en archivos JSON.</li>
           <li>No sustituye un sistema de monitorizacion productivo.</li>
+          <li>Conviven runtime, labs y scripts; la vista publica debe separar esas fronteras.</li>
         </ul>
       </section>
     </div>
@@ -77,6 +84,7 @@
         <li><a href="../index.html">Volver a inicio</a></li>
         <li><a href="rag-evidence-first.html">RAG evidence-first</a></li>
         <li><a href="telegram-observability.html">Telegram + observabilidad</a></li>
+        <li><a href="repo-maturity.html">Madurez del repo</a></li>
       </ul>
     </aside>
   </main>

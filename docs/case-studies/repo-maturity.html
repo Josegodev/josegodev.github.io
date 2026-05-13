@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Madurez tecnica del portfolio: que esta maduro, que es experimental y que no debe venderse como produccion.">
+  <title>Madurez tecnica | Caso tecnico</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">José González Oliva</a>
+      <nav class="nav-links" aria-label="Navegacion de casos">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="nucleo-runtime.html">Runtime</a>
+        <a href="rag-evidence-first.html">RAG</a>
+        <a href="telegram-observability.html">Telegram</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case-header">
+    <div class="wrap">
+      <p class="eyebrow">Madurez tecnica</p>
+      <h1>Estado real del repo fuente</h1>
+      <p class="subtitle">Lectura honesta para reclutadores: que demuestra el sistema, que sigue siendo experimental y que no debe venderse como produccion.</p>
+    </div>
+  </section>
+
+  <main class="wrap case-layout">
+    <div>
+      <section class="section">
+        <h2>Que esta maduro</h2>
+        <ul class="plain-list">
+          <li>Separacion conceptual entre runtime, contratos, adapters de proveedor, servicios y trazabilidad.</li>
+          <li>Backend FastAPI con endpoints claros para salud, documentos y chat.</li>
+          <li>Integracion Telegram usada como canal operativo para probar el backend.</li>
+          <li>Trazas JSON/JSONL con `trace_id`, latencia, estado RAG, errores y metricas de tokens cuando estan disponibles.</li>
+          <li>Evals deterministas para detectar drift de respuestas, longitud, latencia y metricas operativas.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Que es experimental</h2>
+        <ul class="plain-list">
+          <li>RAG documental dependiente de corpus privado, SQLite local y calidad de chunking.</li>
+          <li>Laboratorios separados para validacion/fallback y pruebas de proveedores.</li>
+          <li>Observabilidad local basada en stdout JSON y archivos JSONL.</li>
+          <li>Convivencia de runtime, scripts y labs que requiere curacion antes de publicarse como demo abierta.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Que no debe venderse como produccion</h2>
+        <ul class="plain-list">
+          <li>No esta validado para alta concurrencia.</li>
+          <li>No tiene empaquetado reproducible completo en la raiz publica.</li>
+          <li>No tiene observabilidad centralizada, SLOs ni monitorizacion productiva.</li>
+          <li>No debe publicar corpus, logs, SQLite, rutas locales, identificadores Telegram ni trazas reales.</li>
+          <li>No debe afirmarse cloud productivo ni seguridad enterprise.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>Proximos pasos tecnicos</h2>
+        <div class="grid two">
+          <div class="card">
+            <h3>Reproducibilidad</h3>
+            <p>Añadir `requirements` raiz o `pyproject`, Dockerfile minimo y comandos de arranque verificables.</p>
+          </div>
+          <div class="card">
+            <h3>Configuracion</h3>
+            <p>Parametrizar URLs locales y separar defaults de desarrollo de configuracion de demo publica.</p>
+          </div>
+          <div class="card">
+            <h3>Healthchecks</h3>
+            <p>Ampliar `/health` para comprobar proveedor LLM, disponibilidad RAG y escritura de trazas.</p>
+          </div>
+          <div class="card">
+            <h3>Demo publica</h3>
+            <p>Crear corpus RAG sintetico, limpiar baselines y publicar trazas anonimizadas generadas para demo.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="card case-nav">
+      <h3>Navegacion</h3>
+      <ul class="plain-list">
+        <li><a href="../index.html">Volver a inicio</a></li>
+        <li><a href="nucleo-runtime.html">Runtime local IA</a></li>
+        <li><a href="rag-evidence-first.html">RAG evidence-first</a></li>
+        <li><a href="telegram-observability.html">Telegram + observabilidad</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Madurez descrita con ejemplos publicos y sinteticos.</div>
+  </footer>
+</body>
+</html>

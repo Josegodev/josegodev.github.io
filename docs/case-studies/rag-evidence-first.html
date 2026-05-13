@@ -15,6 +15,7 @@
         <a href="../index.html#proyectos">Proyectos</a>
         <a href="nucleo-runtime.html">NUCLEO</a>
         <a href="telegram-observability.html">Telegram</a>
+        <a href="repo-maturity.html">Madurez</a>
       </nav>
     </div>
   </header>
@@ -23,7 +24,7 @@
     <div class="wrap">
       <p class="eyebrow">Caso tecnico</p>
       <h1>RAG documental evidence-first</h1>
-      <p class="subtitle">Sistema de recuperacion documental orientado a responder con evidencia y reconocer cuando el contexto no es suficiente.</p>
+      <p class="subtitle">Recuperacion documental con estados explicitos EVIDENCE_FOUND / NO_EVIDENCE y respuestas condicionadas por evidencia.</p>
     </div>
   </section>
 
@@ -36,19 +37,38 @@
 
       <section class="section">
         <h2>Decision arquitectonica</h2>
-        <p>Priorizar retrieval, evidencia y estado de recuperacion antes de redactar. Si no hay fragmentos suficientes, la respuesta debe declarar la limitacion en lugar de completar con suposiciones.</p>
+        <p>Priorizar retrieval, evidencia y estado de recuperacion antes de redactar. Si el estado es `NO_EVIDENCE`, la respuesta debe declarar la limitacion en lugar de completar con suposiciones.</p>
       </section>
 
       <section class="section">
         <h2>Flujo simplificado</h2>
         <div class="card">
-          <p>Consulta -> normalizacion -> busqueda documental -> seleccion de fragmentos -> evaluacion de suficiencia -> respuesta con evidencia o bloqueo.</p>
+          <p>Consulta -> normalizacion -> busqueda documental -> seleccion de chunks -> estado EVIDENCE_FOUND / NO_EVIDENCE -> respuesta con evidencia o marcador de no-evidencia.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Ejemplo sintetico</h2>
+        <div class="metric-block">
+<pre>{
+  "query": "Que componentes intervienen en una ejecucion trazable?",
+  "retrieval_status": "EVIDENCE_FOUND",
+  "chunks": [
+    {
+      "chunk_id": 101,
+      "source": "public-demo/runtime-overview.md",
+      "score": 4
+    }
+  ],
+  "published_corpus": "synthetic_demo_only"
+}</pre>
         </div>
       </section>
 
       <section class="section">
         <h2>Que demuestra</h2>
         <p>Criterio para construir IA documental con control de alucinaciones, trazabilidad de fuentes y comportamiento explicito ante informacion insuficiente.</p>
+        <p>El corpus real no se publica. Para portfolio se usan ejemplos sinteticos que muestran contrato y comportamiento, no contenido privado.</p>
       </section>
 
       <section class="section">
@@ -67,6 +87,7 @@
           <li>La calidad depende de los documentos de entrada.</li>
           <li>El chunking requiere ajuste por dominio.</li>
           <li>No incluye evaluacion automatica extensa de precision de retrieval.</li>
+          <li>La demo publica no incluye el SQLite ni corpus privados originales.</li>
         </ul>
       </section>
     </div>
@@ -77,6 +98,7 @@
         <li><a href="../index.html">Volver a inicio</a></li>
         <li><a href="nucleo-runtime.html">NUCLEO runtime</a></li>
         <li><a href="telegram-observability.html">Telegram + observabilidad</a></li>
+        <li><a href="repo-maturity.html">Madurez del repo</a></li>
       </ul>
     </aside>
   </main>
