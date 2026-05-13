@@ -29,7 +29,7 @@
       <p class="tagline">FastAPI · RAG · LLMOps · Observability · Automation</p>
       <div class="actions">
         <a class="button primary" href="#projects">View projects</a>
-        <a class="button" href="#terms">Technical terms</a>
+        <button class="button" id="terms-toggle" type="button" aria-expanded="false" aria-controls="terms-panel">Technical terms</button>
       </div>
     </div>
   </section>
@@ -53,7 +53,7 @@
       </div>
     </section>
 
-    <section class="section" id="terms" aria-labelledby="terms-title">
+    <section class="section terms-panel hidden" id="terms-panel" aria-labelledby="terms-title">
       <h2 id="terms-title">Technical terms, in plain English</h2>
       <div class="grid two">
         <div class="card">
@@ -228,6 +228,6 @@
   <footer class="footer">
     <div class="wrap">Static GitHub Pages portfolio. No dependencies and no sensitive data. <a href="ai-assisted-development.html">AI-assisted development</a>.</div>
   </footer>
-  <script src="accordion.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

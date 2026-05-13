@@ -133,6 +133,8 @@ p {
   border-radius: 6px;
   color: var(--text);
   font-weight: 700;
+  background: transparent;
+  cursor: pointer;
 }
 
 .button.primary {
@@ -146,6 +148,14 @@ main {
 
 .section {
   margin-top: 42px;
+}
+
+.hidden {
+  display: none;
+}
+
+.terms-panel {
+  scroll-margin-top: 24px;
 }
 
 .accordion-trigger {
