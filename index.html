@@ -39,31 +39,34 @@
       <h2 id="what-i-build">I build operational harnesses for local LLMs</h2>
       <p>Not just chatbots or AI demos. I build the control layer around language models: retrieval, context, prompts, model calls, validation, traces, metrics, errors, replayability and evaluation.</p>
       <p>A harness is the execution layer that makes a local LLM usable as a software component. The model is only one part of the system; around it, the harness controls what context it receives, what evidence it uses, how each answer is traced, how failures are detected and how different models can be compared under the same conditions.</p>
+      <figure class="comparison-figure harness-figure">
+        <img class="comparison-image" src="IMAGENES/9a619664-bcba-4997-99d6-523741bf6de1.png" alt="Comparison infographic showing Cloud, OpenClaw and NUCLEO as three AI system architectures, highlighting runtime scope, extensions, memory, evidence, control and execution.">
+      </figure>
       <div class="grid two">
-        <div class="card">
-          <h3>Local model execution</h3>
+        <details class="card harness-card">
+          <summary>Local model execution</summary>
           <p>FastAPI backends connected to local LLM providers such as Ollama and LM Studio, with provider-independent boundaries.</p>
-        </div>
-        <div class="card">
-          <h3>Controlled retrieval and context</h3>
+        </details>
+        <details class="card harness-card">
+          <summary>Controlled retrieval and context</summary>
           <p>RAG over local documents, structured prompts, controlled context injection, retrieval status and source tracking.</p>
-        </div>
-        <div class="card">
-          <h3>Traceable runs</h3>
+        </details>
+        <details class="card harness-card">
+          <summary>Traceable runs</summary>
           <p>Each execution can carry a trace_id or run_id, plus latency, token usage, estimated cost, errors and retrieval status.</p>
-        </div>
-        <div class="card">
-          <h3>Replay and evaluation</h3>
+        </details>
+        <details class="card harness-card">
+          <summary>Replay and evaluation</summary>
           <p>Replay harnesses make it possible to compare outputs across models, prompts and retrieval settings with the same inputs.</p>
-        </div>
-        <div class="card">
-          <h3>Shared backend clients</h3>
+        </details>
+        <details class="card harness-card">
+          <summary>Shared backend clients</summary>
           <p>Frontend and Telegram interfaces act as clients of the same backend instead of becoming separate AI systems.</p>
-        </div>
-        <div class="card">
-          <h3>Prototype-to-production mindset</h3>
+        </details>
+        <details class="card harness-card">
+          <summary>Prototype-to-production mindset</summary>
           <p>The focus is operational, traceable, auditable and reproducible behavior, without claiming the current system is production-grade.</p>
-        </div>
+        </details>
       </div>
     </section>
 
@@ -71,10 +74,6 @@
       <p class="eyebrow">Architecture comparison</p>
       <h2 id="runtime-comparison">Controlled AI Runtime: Cloud, OpenClaw and NUCLEO</h2>
       <p>This comparison shows three different ways to structure AI systems. Cloud platforms prioritize managed services and fast deployment. OpenClaw represents a persistent agent-oriented approach with routing, plugins and background workflows. NUCLEO (LOCALES) focuses on controlled execution: the model is only one replaceable component inside a governed backend runtime.</p>
-
-      <figure class="comparison-figure">
-        <img class="comparison-image" src="IMAGENES/9a619664-bcba-4997-99d6-523741bf6de1.png" alt="Comparison infographic showing Cloud, OpenClaw and NUCLEO as three AI system architectures, highlighting runtime scope, extensions, memory, evidence, control and execution.">
-      </figure>
 
       <div class="grid">
         <article class="card">

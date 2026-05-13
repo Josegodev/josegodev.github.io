@@ -213,6 +213,10 @@ li {
   margin: 22px 0;
 }
 
+.harness-figure {
+  margin-top: 22px;
+}
+
 .comparison-image {
   display: block;
   width: 100%;
@@ -224,6 +228,21 @@ li {
 
 .solve-card {
   margin-top: 16px;
+}
+
+.harness-card summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text);
+  list-style-position: inside;
+}
+
+.harness-card summary:hover {
+  color: var(--accent-strong);
+}
+
+.harness-card p {
+  margin: 0.75rem 0 0;
 }
 
 .role-list,
