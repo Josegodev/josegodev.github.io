@@ -170,6 +170,15 @@ li {
   color: var(--muted);
 }
 
+.narrative-card {
+  max-width: 920px;
+}
+
+.narrative-card .lead {
+  color: var(--text);
+  font-size: 1.08rem;
+}
+
 .role-list,
 .stack-list,
 .plain-list {
