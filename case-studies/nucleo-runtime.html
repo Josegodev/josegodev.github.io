@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Caso tecnico: runtime local IA controlado con FastAPI, RAG, adapters LLM y trazabilidad JSON.">
+  <title>Runtime local IA controlado | Caso tecnico</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">José González Oliva</a>
+      <nav class="nav-links" aria-label="Navegacion de casos">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="rag-evidence-first.html">RAG</a>
+        <a href="telegram-observability.html">Telegram</a>
+        <a href="repo-maturity.html">Madurez</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case-header">
+    <div class="wrap">
+      <p class="eyebrow">Caso tecnico</p>
+      <h1>Runtime local IA controlado</h1>
+      <p class="subtitle">Vista publica curada de un backend IA local basado en FastAPI, RAG opcional, adapters de proveedor y trazabilidad JSON.</p>
+    </div>
+  </section>
+
+  <main class="wrap case-layout">
+    <div>
+      <section class="section">
+        <h2>Problema</h2>
+        <p>Muchos prototipos IA mezclan prompt, modelo, herramientas, reglas de negocio y salida final en una unica capa. Esto dificulta reproducir errores, aplicar politicas y entender que ocurrio en cada ejecucion.</p>
+      </section>
+
+      <section class="section">
+        <h2>Decision arquitectonica</h2>
+        <p>Diseñar un runtime backend donde FastAPI mantiene contratos, servicios y trazabilidad; el modelo se consume mediante adapters intercambiables y no decide acciones operativas.</p>
+      </section>
+
+      <section class="section">
+        <h2>Flujo simplificado</h2>
+        <div class="card">
+          <p>Request / Telegram / API -> FastAPI -> servicio bot/backend -> RAG opcional -> provider adapter -> respuesta -> trace JSON.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Vista curada</h2>
+        <p>El sistema fuente contiene varios componentes y laboratorios. Este caso publica solo la arquitectura defendible: runtime local, contratos, adapters, RAG y trazabilidad. No se publican corpus privados, rutas locales, tokens, logs reales ni artefactos de ejecucion.</p>
+      </section>
+
+      <section class="section">
+        <h2>Que demuestra</h2>
+        <p>Capacidad para convertir un prototipo IA en un backend inspeccionable, con puntos claros de control, metricas, errores analizables y proveedores LLM sustituibles.</p>
+      </section>
+
+      <section class="section">
+        <h2>Stack</h2>
+        <p>Python, FastAPI, Pydantic, JSON logs, Telegram API, RAG SQLite, Ollama/OpenAI adapters y scripts de evaluacion local.</p>
+      </section>
+
+      <section class="section">
+        <h2>Estado actual</h2>
+        <p><span class="status">Experimental.</span> Backend local avanzado y demo presentable con curacion. No se presenta como despliegue productivo.</p>
+      </section>
+
+      <section class="section">
+        <h2>Limitaciones</h2>
+        <ul class="plain-list">
+          <li>Sin validacion de alta concurrencia.</li>
+          <li>Persistencia de observabilidad basada en archivos JSON.</li>
+          <li>No sustituye un sistema de monitorizacion productivo.</li>
+          <li>Conviven runtime, labs y scripts; la vista publica debe separar esas fronteras.</li>
+        </ul>
+      </section>
+    </div>
+
+    <aside class="card case-nav">
+      <h3>Navegacion</h3>
+      <ul class="plain-list">
+        <li><a href="../index.html">Volver a inicio</a></li>
+        <li><a href="rag-evidence-first.html">RAG evidence-first</a></li>
+        <li><a href="telegram-observability.html">Telegram + observabilidad</a></li>
+        <li><a href="repo-maturity.html">Madurez del repo</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Caso sin datos sensibles ni referencias privadas.</div>
+  </footer>
+</body>
+</html>

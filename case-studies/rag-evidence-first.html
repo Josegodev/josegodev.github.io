@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Caso tecnico RAG documental evidence-first.">
+  <title>RAG evidence-first | Caso tecnico</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">José González Oliva</a>
+      <nav class="nav-links" aria-label="Navegacion de casos">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="nucleo-runtime.html">NUCLEO</a>
+        <a href="telegram-observability.html">Telegram</a>
+        <a href="repo-maturity.html">Madurez</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case-header">
+    <div class="wrap">
+      <p class="eyebrow">Caso tecnico</p>
+      <h1>RAG documental evidence-first</h1>
+      <p class="subtitle">Recuperacion documental con estados explicitos EVIDENCE_FOUND / NO_EVIDENCE y respuestas condicionadas por evidencia.</p>
+    </div>
+  </section>
+
+  <main class="wrap case-layout">
+    <div>
+      <section class="section">
+        <h2>Problema</h2>
+        <p>Un LLM puede responder de forma convincente aunque la base documental no soporte la respuesta. En contextos tecnicos, esto reduce confianza y aumenta el riesgo operativo.</p>
+      </section>
+
+      <section class="section">
+        <h2>Decision arquitectonica</h2>
+        <p>Priorizar retrieval, evidencia y estado de recuperacion antes de redactar. Si el estado es `NO_EVIDENCE`, la respuesta debe declarar la limitacion en lugar de completar con suposiciones.</p>
+      </section>
+
+      <section class="section">
+        <h2>Flujo simplificado</h2>
+        <div class="card">
+          <p>Consulta -> normalizacion -> busqueda documental -> seleccion de chunks -> estado EVIDENCE_FOUND / NO_EVIDENCE -> respuesta con evidencia o marcador de no-evidencia.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Ejemplo sintetico</h2>
+        <div class="metric-block">
+<pre>{
+  "query": "Que componentes intervienen en una ejecucion trazable?",
+  "retrieval_status": "EVIDENCE_FOUND",
+  "chunks": [
+    {
+      "chunk_id": 101,
+      "source": "public-demo/runtime-overview.md",
+      "score": 4
+    }
+  ],
+  "published_corpus": "synthetic_demo_only"
+}</pre>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Que demuestra</h2>
+        <p>Criterio para construir IA documental con control de alucinaciones, trazabilidad de fuentes y comportamiento explicito ante informacion insuficiente.</p>
+        <p>El corpus real no se publica. Para portfolio se usan ejemplos sinteticos que muestran contrato y comportamiento, no contenido privado.</p>
+      </section>
+
+      <section class="section">
+        <h2>Stack</h2>
+        <p>Python, FastAPI, JSON, embeddings, chunking documental, modelos locales, contratos de respuesta.</p>
+      </section>
+
+      <section class="section">
+        <h2>Estado actual</h2>
+        <p><span class="status">Experimental.</span> Flujo local orientado a validacion de arquitectura, calidad de chunking y trazabilidad de recuperacion.</p>
+      </section>
+
+      <section class="section">
+        <h2>Limitaciones</h2>
+        <ul class="plain-list">
+          <li>La calidad depende de los documentos de entrada.</li>
+          <li>El chunking requiere ajuste por dominio.</li>
+          <li>No incluye evaluacion automatica extensa de precision de retrieval.</li>
+          <li>La demo publica no incluye el SQLite ni corpus privados originales.</li>
+        </ul>
+      </section>
+    </div>
+
+    <aside class="card case-nav">
+      <h3>Navegacion</h3>
+      <ul class="plain-list">
+        <li><a href="../index.html">Volver a inicio</a></li>
+        <li><a href="nucleo-runtime.html">NUCLEO runtime</a></li>
+        <li><a href="telegram-observability.html">Telegram + observabilidad</a></li>
+        <li><a href="repo-maturity.html">Madurez del repo</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Caso sin datos sensibles ni referencias privadas.</div>
+  </footer>
+</body>
+</html>
