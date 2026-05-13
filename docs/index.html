@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio tecnico de José González Oliva, Backend & AI Engineer especializado en FastAPI, RAG, LLMOps, observabilidad y automatizacion.">
+  <title>José González Oliva | Backend & AI Engineer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">José González Oliva</a>
+      <nav class="nav-links" aria-label="Navegacion principal">
+        <a href="#proyectos">Proyectos</a>
+        <a href="#metricas">Metricas</a>
+        <a href="#stack">Stack</a>
+        <a href="#limitaciones">Limitaciones</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Backend & AI Engineer</p>
+      <h1>José González Oliva</h1>
+      <p class="subtitle">Construyo backends IA trazables, reproducibles y operables: sistemas que separan modelo, runtime, contratos, politicas y herramientas.</p>
+      <p class="tagline">FastAPI · RAG · LLMOps · Observabilidad · Automatizacion</p>
+      <div class="actions">
+        <a class="button primary" href="#proyectos">Ver proyectos</a>
+        <a class="button" href="#metricas">Ver traza JSON</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section class="section" aria-labelledby="resumen">
+      <h2 id="resumen">Resumen</h2>
+      <p>Mi foco es construir sistemas IA operables, no solo chatbots: APIs con contratos claros, recuperacion documental verificable, ejecuciones trazables y medicion de tokens, latencia, coste estimado y errores.</p>
+      <p>Trabajo con despliegue incremental, modelos locales cuando el contexto lo permite e integraciones web o Telegram para llevar la IA a flujos reales de uso.</p>
+    </section>
+
+    <section class="section" aria-labelledby="roles">
+      <h2 id="roles">Roles objetivo</h2>
+      <div class="card">
+        <ul class="role-list">
+          <li>Backend Developer con IA</li>
+          <li>AI Engineer</li>
+          <li>LLMOps / AIOps inicial</li>
+          <li>Automation Engineer</li>
+          <li>Product AI Engineer</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="proyectos" aria-labelledby="proyectos-title">
+      <h2 id="proyectos-title">Proyectos principales</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>NUCLEO — Runtime backend para agentes IA controlados</h3>
+          <p>Runtime FastAPI para ejecutar agentes con contratos, politicas, herramientas y trazabilidad por ejecucion.</p>
+          <a href="case-studies/nucleo-runtime.html">Leer caso</a>
+          <div class="pill-row">
+            <span class="pill">FastAPI</span>
+            <span class="pill">Runtime</span>
+            <span class="pill">Tracing</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>RAG documental evidence-first</h3>
+          <p>Flujo RAG orientado a responder solo cuando existe evidencia recuperada suficiente y revisable.</p>
+          <a href="case-studies/rag-evidence-first.html">Leer caso</a>
+          <div class="pill-row">
+            <span class="pill">RAG</span>
+            <span class="pill">Chunking</span>
+            <span class="pill">Evidencia</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Web + Telegram + observabilidad</h3>
+          <p>Integracion de canales web y Telegram con trazas JSON, control de errores y metricas por solicitud.</p>
+          <a href="case-studies/telegram-observability.html">Leer caso</a>
+          <div class="pill-row">
+            <span class="pill">Telegram</span>
+            <span class="pill">JSON Logs</span>
+            <span class="pill">Docker</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="metricas" aria-labelledby="metricas-title">
+      <h2 id="metricas-title">Metricas por ejecucion</h2>
+      <p>Cada ejecucion debe poder inspeccionarse sin depender de memoria conversacional ni logs opacos.</p>
+      <div class="metric-block" aria-label="Ejemplo de traza JSON">
+<pre>{
+  "trace_id": "trc_demo_20260513_001",
+  "source": "web",
+  "model": "local-llm-demo",
+  "retrieval_status": "evidence_found",
+  "tokens_input": 1284,
+  "tokens_output": 342,
+  "latency_ms": 1840,
+  "output_tokens_per_second": 18.6,
+  "status": "ok"
+}</pre>
+      </div>
+    </section>
+
+    <section class="section" id="stack" aria-labelledby="stack-title">
+      <h2 id="stack-title">Stack tecnico</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Backend</h3>
+          <p>Python, FastAPI, contratos HTTP, validacion de payloads, separacion por capas y servicios operables.</p>
+        </div>
+        <div class="card">
+          <h3>IA / LLM</h3>
+          <p>RAG documental, modelos locales con Ollama o LM Studio, prompts versionables y politicas de respuesta.</p>
+        </div>
+        <div class="card">
+          <h3>Datos</h3>
+          <p>JSON, trazas de ejecucion, metadatos de retrieval, chunking documental y salidas auditables.</p>
+        </div>
+        <div class="card">
+          <h3>Operacion</h3>
+          <p>Docker, despliegue incremental, medicion de latencia, tokens, errores y coste estimado.</p>
+        </div>
+        <div class="card">
+          <h3>Frontend / Integraciones</h3>
+          <p>HTML, CSS, interfaces web simples, bots de Telegram y APIs para conectar sistemas existentes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="limitaciones" aria-labelledby="limitaciones-title">
+      <h2 id="limitaciones-title">Limitaciones actuales</h2>
+      <div class="card">
+        <ul class="plain-list">
+          <li>Proyecto experimental.</li>
+          <li>Observabilidad local basada en JSON.</li>
+          <li>Sin alta concurrencia validada.</li>
+          <li>Cloud en fase de estudio.</li>
+          <li>RAG dependiente de calidad documental y estrategia de chunking.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Portfolio estatico para GitHub Pages. Sin dependencias y sin datos sensibles.</div>
+  </footer>
+</body>
+</html>

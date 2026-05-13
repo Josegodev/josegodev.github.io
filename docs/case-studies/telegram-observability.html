@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Caso tecnico Web + Telegram + observabilidad.">
+  <title>Telegram y observabilidad | Caso tecnico</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">José González Oliva</a>
+      <nav class="nav-links" aria-label="Navegacion de casos">
+        <a href="../index.html#proyectos">Proyectos</a>
+        <a href="nucleo-runtime.html">NUCLEO</a>
+        <a href="rag-evidence-first.html">RAG</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="case-header">
+    <div class="wrap">
+      <p class="eyebrow">Caso tecnico</p>
+      <h1>Web + Telegram + observabilidad</h1>
+      <p class="subtitle">Integracion de canales de uso con trazabilidad por ejecucion, control de errores y metricas utiles para operar.</p>
+    </div>
+  </section>
+
+  <main class="wrap case-layout">
+    <div>
+      <section class="section">
+        <h2>Problema</h2>
+        <p>Las integraciones IA suelen fallar cuando no existe visibilidad sobre origen de la solicitud, modelo usado, latencia, tokens, errores y estado de retrieval.</p>
+      </section>
+
+      <section class="section">
+        <h2>Decision arquitectonica</h2>
+        <p>Unificar las entradas web y Telegram en un backend comun, registrar trazas JSON por ejecucion y mantener el canal separado de la logica de modelo.</p>
+      </section>
+
+      <section class="section">
+        <h2>Flujo simplificado</h2>
+        <div class="card">
+          <p>Usuario web o Telegram -> adaptador de canal -> API backend -> runtime IA -> respuesta -> traza con metricas y estado.</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Que demuestra</h2>
+        <p>Capacidad para integrar IA en canales reales sin perder control operativo, manteniendo trazabilidad y separacion entre interfaz, backend y modelo.</p>
+      </section>
+
+      <section class="section">
+        <h2>Stack</h2>
+        <p>FastAPI, Telegram Bot API, HTML/CSS, JSON logs, Docker, modelos locales segun disponibilidad.</p>
+      </section>
+
+      <section class="section">
+        <h2>Estado actual</h2>
+        <p><span class="status">Experimental.</span> Flujo preparado para pruebas locales e iteracion de metricas antes de endurecer despliegue.</p>
+      </section>
+
+      <section class="section">
+        <h2>Limitaciones</h2>
+        <ul class="plain-list">
+          <li>No incluye gestion avanzada de colas.</li>
+          <li>Sin SLOs formales ni panel externo de observabilidad.</li>
+          <li>El coste se estima segun metrica disponible y puede ser cero en modelos locales.</li>
+        </ul>
+      </section>
+    </div>
+
+    <aside class="card case-nav">
+      <h3>Navegacion</h3>
+      <ul class="plain-list">
+        <li><a href="../index.html">Volver a inicio</a></li>
+        <li><a href="nucleo-runtime.html">NUCLEO runtime</a></li>
+        <li><a href="rag-evidence-first.html">RAG evidence-first</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">Caso sin datos sensibles ni referencias privadas.</div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "trace_id": "trc_demo_20260513_002",
+  "source": "telegram",
+  "model": "local-llm-demo",
+  "runtime": "fastapi",
+  "retrieval_status": "insufficient_evidence",
+  "tokens_input": 836,
+  "tokens_output": 74,
+  "latency_ms": 960,
+  "output_tokens_per_second": 7.7,
+  "cost_estimate_eur": 0.0,
+  "status": "error",
+  "error": {
+    "type": "policy_block",
+    "message": "La respuesta requiere evidencia documental no disponible en el contexto recuperado."
+  }
+}
