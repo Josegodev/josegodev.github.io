@@ -1,63 +1,196 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Case study: Telegram integration and operational observability with traces, tokens, latency and JSONL logs.">
-  <title>Telegram and observability | Case study</title>
-  <link rel="stylesheet" href="../styles.css">
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Telegram + Observability | José González Oliva</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#44dfab",
+                        "surface-container-highest": "#2f353f",
+                        "surface-container": "#1a2029",
+                        "tertiary": "#c2cee3",
+                        "primary": "#4de6b1",
+                        "background": "#0e141d",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "inverse-primary": "#006c4f",
+                        "surface-dim": "#0e141d",
+                        "primary-fixed-dim": "#44dfab",
+                        "on-surface-variant": "#bbcac1",
+                        "secondary-container": "#ee9800",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary-fixed-dim": "#bbc7dc",
+                        "outline-variant": "#3c4a43",
+                        "on-tertiary-fixed-variant": "#3c4859",
+                        "on-primary-fixed-variant": "#00513a",
+                        "surface-container-high": "#242a34",
+                        "on-tertiary-fixed": "#101c2c",
+                        "on-background": "#dde2f0",
+                        "on-secondary-container": "#5b3800",
+                        "inverse-on-surface": "#2b313b",
+                        "surface-variant": "#2f353f",
+                        "surface": "#0e141d",
+                        "on-primary": "#003827",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "surface-container-low": "#161c25",
+                        "on-tertiary-container": "#394556",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-secondary": "#472a00",
+                        "secondary": "#ffb95f",
+                        "on-surface": "#dde2f0",
+                        "primary-fixed": "#67fcc6",
+                        "surface-container-lowest": "#080e17",
+                        "on-primary-fixed": "#002116",
+                        "primary-container": "#20c997",
+                        "surface-bright": "#343944",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#d7e3f9",
+                        "outline": "#85948c",
+                        "inverse-surface": "#dde2f0",
+                        "on-primary-container": "#004e38",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary": "#253141",
+                        "tertiary-container": "#a7b3c7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "4rem",
+                        "xs": "0.5rem",
+                        "margin": "auto",
+                        "sm": "1rem",
+                        "lg": "2.5rem",
+                        "base": "4px",
+                        "md": "1.5rem",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["sans-serif"],
+                        "headline-xl": ["sans-serif"],
+                        "code-sm": ["JetBrains Mono"],
+                        "body-md": ["sans-serif"],
+                        "headline-lg": ["sans-serif"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "code-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #0e141d;
+            color: #dde2f0;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .glass-panel {
+            background: rgba(29, 41, 57, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
 </head>
-<body>
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="../index.html">José González Oliva</a>
-      <nav class="nav-links" aria-label="Case navigation">
-        <a href="../index.html#projects">Projects</a>
-        <a href="nucleo-runtime.html">Runtime</a>
-        <a href="rag-evidence-first.html">RAG</a>
-        <a href="repo-maturity.html">Maturity</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="case-header">
-    <div class="wrap">
-      <p class="eyebrow">Case study</p>
-      <h1>Telegram + observability</h1>
-      <p class="subtitle">Telegram used as a secondary operational channel to test a backend while preserving traces, metrics and error visibility.</p>
-    </div>
-  </section>
-
-  <main class="wrap case-layout">
-    <div>
-      <section class="section">
-        <h2>Problem</h2>
-        <p>AI integrations become difficult to operate when teams cannot answer basic questions: which channel received the request, which model handled it, which evidence was used, how long it took and what failed.</p>
-      </section>
-
-      <section class="section">
-        <h2>Plain-English observability</h2>
-        <p>A trace is an execution record. It connects a request to the model, retrieval status, latency, token counts and errors. A `trace_id` is the identifier used to follow that execution across components.</p>
-        <p>Tokens are small pieces of text processed by the model. Tracking input and output tokens helps estimate cost, latency and model workload. Latency is the time the system takes to return a response.</p>
-        <p>JSONL means one JSON record per line. It is a simple local format for storing many execution records without needing a database or external monitoring service.</p>
-      </section>
-
-      <section class="section">
-        <h2>Architectural decision</h2>
-        <p>Keep Telegram as a channel adapter, not as the core system. Telegram messages pass through bot logic into the backend, and the backend handles retrieval, provider calls, response generation and trace writing.</p>
-      </section>
-
-      <section class="section">
-        <h2>Simplified flow</h2>
-        <div class="card">
-          <p>Telegram message -> bot service -> backend API -> optional RAG -> LLM provider -> response -> JSONL trace.</p>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Synthetic trace</h2>
-        <div class="metric-block">
-<pre>{
+<body class="bg-background text-on-background selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="bg-background/80 backdrop-blur-md dark:bg-background/80 docked full-width top-0 sticky z-50 border-b border-white/5">
+<div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter py-4">
+<a class="font-headline-lg text-body-md font-bold text-on-surface dark:text-on-surface" href="../index.html">José González Oliva</a>
+<nav class="hidden md:flex items-center gap-md font-body-md text-body-md">
+<a class="text-primary dark:text-primary-fixed font-bold border-b border-primary hover:text-primary transition-colors duration-200" href="../index.html#projects">Projects</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#metrics">Metrics</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#stack">Stack</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#status">Status</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#limitations">Limitations</a>
+</nav>
+<a class="bg-primary text-on-primary px-4 py-2 font-label-caps text-label-caps rounded-lg scale-95 active:scale-90 transition-transform" href="https://github.com/Josegodev">Contact</a>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-gutter py-xl">
+<!-- Hero Section -->
+<section class="mb-xl">
+<span class="font-label-caps text-label-caps text-primary uppercase mb-xs block">Case Study</span>
+<h1 class="font-headline-xl text-headline-xl text-on-background mt-xs mb-sm">Telegram + observability</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+                Telegram used as a secondary operational channel to test a backend while preserving traces, metrics and error visibility.
+            </p>
+</section>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-xl">
+<!-- Content Area -->
+<div class="md:col-span-8 flex flex-col gap-xl">
+<!-- Problem Section -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-md">Problem</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        AI integrations become difficult to operate when teams cannot answer basic questions: which channel received the request, which model handled it, which evidence was used, how long it took and what failed.
+                    </p>
+</article>
+<!-- Plain-English Section -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-md">Plain-English observability</h2>
+<div class="space-y-sm text-on-surface-variant">
+<p class="font-body-md text-body-md">
+                            A trace is an execution record. It connects a request to the model, retrieval status, latency, token counts and errors. A <code class="font-code-sm bg-surface-container px-1 text-primary">trace_id</code> is the identifier used to follow that execution across components.
+                        </p>
+<p class="font-body-md text-body-md">
+                            Tokens are small pieces of text processed by the model. Tracking input and output tokens helps estimate cost, latency and model workload. Latency is the time the system takes to return a response.
+                        </p>
+<p class="font-body-md text-body-md">
+                            JSONL means one JSON record per line. It is a simple local format for storing many execution records without needing a database or external monitoring service.
+                        </p>
+</div>
+</article>
+<!-- Architectural Decision -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-md">Architectural decision</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Keep Telegram as a channel adapter, not as the core system. Telegram messages pass through bot logic into the backend, and the backend handles retrieval, provider calls, response generation and trace writing.
+                    </p>
+</article>
+<!-- Simplified Flow -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-md">Simplified flow</h2>
+<div class="glass-panel p-md rounded-lg">
+<p class="font-code-sm text-code-sm text-primary flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">account_tree</span>
+                            Telegram message -&gt; bot service -&gt; backend API -&gt; optional RAG -&gt; LLM provider -&gt; response -&gt; JSONL trace.
+                        </p>
+</div>
+</article>
+<!-- Synthetic Trace (Code Block) -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-md">Synthetic trace</h2>
+<div class="bg-surface-container-lowest p-md border border-white/5 rounded-lg overflow-x-auto">
+<pre class="font-code-sm text-code-sm text-on-surface-variant"><code>{
   "trace_id": "trc_public_demo_ok_001",
   "source": "telegram",
   "provider": "ollama",
@@ -66,44 +199,80 @@
   "tokens_output": 286,
   "latency_ms": 1730,
   "status": "ok"
-}</pre>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>What it demonstrates</h2>
-        <p>Ability to connect AI behavior to operational evidence: channel, model, retrieval status, token workload, latency and error state. No real user identifiers, chat identifiers, user text, tokens or logs are published.</p>
-      </section>
-
-      <section class="section">
-        <h2>Stack</h2>
-        <p>FastAPI, Telegram Bot API, JSON/JSONL traces, local model providers, synthetic examples and deterministic evaluation scripts.</p>
-      </section>
-
-      <section class="section">
-        <h2>Limitations</h2>
-        <ul class="plain-list">
-          <li>No advanced queue management.</li>
-          <li>No formal SLOs or external observability dashboard.</li>
-          <li>Local JSONL logging is useful for a lab, but not a replacement for production monitoring.</li>
-          <li>Cost and token metrics depend on what the selected provider returns.</li>
-        </ul>
-      </section>
-    </div>
-
-    <aside class="card case-nav">
-      <h3>Navigation</h3>
-      <ul class="plain-list">
-        <li><a href="../index.html">Back home</a></li>
-        <li><a href="nucleo-runtime.html">Controlled runtime</a></li>
-        <li><a href="rag-evidence-first.html">Evidence-first RAG</a></li>
-        <li><a href="repo-maturity.html">Repository maturity</a></li>
-      </ul>
-    </aside>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">Synthetic observability examples only.</div>
-  </footer>
-</body>
-</html>
+}</code></pre>
+</div>
+</article>
+<!-- What it demonstrates -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-md">What it demonstrates</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Ability to connect AI behavior to operational evidence: channel, model, retrieval status, token workload, latency and error state. No real user identifiers, chat identifiers, user text, tokens or logs are published.
+                    </p>
+</article>
+<!-- Stack -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-md">Stack</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        FastAPI, Telegram Bot API, JSON/JSONL traces, local model providers, synthetic examples and deterministic evaluation scripts.
+                    </p>
+</article>
+<!-- Limitations -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-md">Limitations</h2>
+<ul class="space-y-xs text-on-surface-variant">
+<li class="flex items-start gap-xs">
+<span class="text-primary mt-1">•</span>
+<span class="font-body-md text-body-md">No advanced queue management.</span>
+</li>
+<li class="flex items-start gap-xs">
+<span class="text-primary mt-1">•</span>
+<span class="font-body-md text-body-md">No formal SLOs or external observability dashboard.</span>
+</li>
+<li class="flex items-start gap-xs">
+<span class="text-primary mt-1">•</span>
+<span class="font-body-md text-body-md">Local JSONL logging is useful for a lab, but not a replacement for production monitoring.</span>
+</li>
+<li class="flex items-start gap-xs">
+<span class="text-primary mt-1">•</span>
+<span class="font-body-md text-body-md">Cost and token metrics depend on what the selected provider returns.</span>
+</li>
+</ul>
+</article>
+</div>
+<!-- Sidebar Navigation -->
+<aside class="md:col-span-4">
+<div class="glass-panel p-lg rounded-xl sticky top-[100px]">
+<h3 class="font-headline-lg text-body-md font-bold mb-md text-on-surface">Navigation</h3>
+<nav class="flex flex-col gap-sm">
+<a class="group flex items-center gap-xs font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="../index.html"><span class="material-symbols-outlined text-[18px] group-hover:translate-x-[-4px] transition-transform">arrow_back</span>Back home</a>
+<a class="flex items-center gap-xs font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="nucleo-runtime.html"><span class="material-symbols-outlined text-[18px]">terminal</span>Controlled runtime</a>
+<a class="flex items-center gap-xs font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="rag-evidence-first.html"><span class="material-symbols-outlined text-[18px]">search</span>Evidence-first RAG</a>
+<a class="flex items-center gap-xs font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="repo-maturity.html"><span class="material-symbols-outlined text-[18px]">check_circle</span>Repository maturity</a>
+</nav>
+<div class="mt-lg pt-lg border-t border-white/5">
+<div class="rounded-lg overflow-hidden h-48 relative">
+<img class="w-full h-full object-cover grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500" data-alt="A macro close-up of a high-tech computer circuit board with glowing neon teal traces illuminating the dark, professional-grade hardware. The perspective is from a low angle, emphasizing the complexity and architectural depth of the motherboard. Soft ambient blue lighting creates a sophisticated, deep-tech mood, reflecting a focused, expert minimalist developer aesthetic. The image captures the essence of observability and technical precision in a modern digital ecosystem." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdSCtnXWocdzT-bkBKwpZQnVH3W47wj0P6rQm19DtFMQFgpMkDWysA47qRgX6dpozoD-mCw7ndAnFZka2ucqZQsrKVft8dzD5xDWfqzQgyHzqcmIvr8-iYi9yMed5uF37oIL4WtGiK1p_eH1sLIrk9U52ExMStWLT0TyYGwQISAM_bMx7mq5dyrUDAfCXLiqaHaTGH8KsixzQwzpfLJBI7vB_Fyna67v6s-l1tT4pVlWW9ndsM9jTLjQwAW5nAV1rlQiArDARPHY-v"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent pointer-events-none"></div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest full-width border-t border-white/5 mt-xl">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-[1200px] mx-auto px-gutter py-xl gap-md">
+<div class="flex flex-col gap-xs items-center md:items-start text-center md:text-left">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Synthetic observability examples only.</span>
+<p class="font-code-sm text-code-sm text-on-surface-variant max-w-md">
+                    Static GitHub Pages portfolio. No dependencies and no sensitive data. AI-assisted development.
+                </p>
+</div>
+<div class="flex gap-lg items-center font-code-sm text-code-sm">
+<a class="text-on-surface-variant hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="https://github.com/Josegodev">GitHub</a>
+<a class="text-on-surface-variant hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="../ai-assisted-development.html">AI note</a>
+<a class="text-on-surface-variant hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="https://github.com/Josegodev/josegodev.github.io">Source</a>
+</div>
+</div>
+</footer>
+</body></html>

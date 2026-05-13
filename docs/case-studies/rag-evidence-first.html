@@ -1,68 +1,203 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Case study: evidence-first document RAG with explicit evidence status and synthetic examples.">
-  <title>Evidence-first document RAG | Case study</title>
-  <link rel="stylesheet" href="../styles.css">
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Evidence-first document RAG | José González Oliva</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "surface-tint": "#44dfab",
+                  "surface-container-highest": "#2f353f",
+                  "surface-container": "#1a2029",
+                  "tertiary": "#c2cee3",
+                  "primary": "#4de6b1",
+                  "background": "#0e141d",
+                  "secondary-fixed-dim": "#ffb95f",
+                  "inverse-primary": "#006c4f",
+                  "surface-dim": "#0e141d",
+                  "primary-fixed-dim": "#44dfab",
+                  "on-surface-variant": "#bbcac1",
+                  "secondary-container": "#ee9800",
+                  "on-secondary-fixed-variant": "#653e00",
+                  "tertiary-fixed-dim": "#bbc7dc",
+                  "outline-variant": "#3c4a43",
+                  "on-tertiary-fixed-variant": "#3c4859",
+                  "on-primary-fixed-variant": "#00513a",
+                  "surface-container-high": "#242a34",
+                  "on-tertiary-fixed": "#101c2c",
+                  "on-background": "#dde2f0",
+                  "on-secondary-container": "#5b3800",
+                  "inverse-on-surface": "#2b313b",
+                  "surface-variant": "#2f353f",
+                  "surface": "#0e141d",
+                  "on-primary": "#003827",
+                  "error-container": "#93000a",
+                  "on-error": "#690005",
+                  "surface-container-low": "#161c25",
+                  "on-tertiary-container": "#394556",
+                  "on-secondary-fixed": "#2a1700",
+                  "on-secondary": "#472a00",
+                  "secondary": "#ffb95f",
+                  "on-surface": "#dde2f0",
+                  "primary-fixed": "#67fcc6",
+                  "surface-container-lowest": "#080e17",
+                  "on-primary-fixed": "#002116",
+                  "primary-container": "#20c997",
+                  "surface-bright": "#343944",
+                  "on-error-container": "#ffdad6",
+                  "tertiary-fixed": "#d7e3f9",
+                  "outline": "#85948c",
+                  "inverse-surface": "#dde2f0",
+                  "on-primary-container": "#004e38",
+                  "error": "#ffb4ab",
+                  "secondary-fixed": "#ffddb8",
+                  "on-tertiary": "#253141",
+                  "tertiary-container": "#a7b3c7"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.125rem",
+                  "lg": "0.25rem",
+                  "xl": "0.5rem",
+                  "full": "0.75rem"
+          },
+          "spacing": {
+                  "xl": "4rem",
+                  "xs": "0.5rem",
+                  "margin": "auto",
+                  "sm": "1rem",
+                  "lg": "2.5rem",
+                  "base": "4px",
+                  "md": "1.5rem",
+                  "gutter": "24px"
+          },
+          "fontFamily": {
+                  "label-caps": ["JetBrains Mono", "monospace"],
+                  "headline-lg-mobile": ["Geist", "sans-serif"],
+                  "headline-xl": ["Geist", "sans-serif"],
+                  "code-sm": ["JetBrains Mono", "monospace"],
+                  "body-md": ["Geist", "sans-serif"],
+                  "headline-lg": ["Geist", "sans-serif"]
+          },
+          "fontSize": {
+                  "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                  "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                  "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "code-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    @font-face {
+      font-family: 'Geist';
+      src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    }
+    @font-face {
+      font-family: 'JetBrains Mono';
+      src: url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap');
+    }
+    body {
+      background-color: #0e141d;
+      color: #dde2f0;
+      font-family: 'Geist', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
 </head>
-<body>
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="../index.html">José González Oliva</a>
-      <nav class="nav-links" aria-label="Case navigation">
-        <a href="../index.html#projects">Projects</a>
-        <a href="nucleo-runtime.html">Runtime</a>
-        <a href="telegram-observability.html">Telegram</a>
-        <a href="repo-maturity.html">Maturity</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="case-header">
-    <div class="wrap">
-      <p class="eyebrow">Case study</p>
-      <h1>Evidence-first document RAG</h1>
-      <p class="subtitle">A document retrieval flow designed to check whether evidence exists before asking the model to answer.</p>
-    </div>
-  </section>
-
-  <main class="wrap case-layout">
-    <div>
-      <section class="section">
-        <h2>Problem</h2>
-        <p>An LLM can generate confident text even when the available documents do not support the answer. This is a hallucination risk: the answer may sound correct but lack evidence.</p>
-      </section>
-
-      <section class="section">
-        <h2>What RAG means here</h2>
-        <p>RAG means Retrieval-Augmented Generation. Before asking the model to answer, the system retrieves relevant information from a controlled document base. The model is then expected to answer using that retrieved evidence.</p>
-        <p>RAG is not described here as making the AI smarter. It is an engineering pattern for grounding answers in available documents and making the evidence path easier to inspect.</p>
-      </section>
-
-      <section class="section">
-        <h2>Critical-information nuance</h2>
-        <p>In sensitive or critical environments, RAG may retrieve controlled operational information. That makes access control, source tracking, logging, document boundaries and evidence status part of the engineering problem.</p>
-        <p>The real corpus is not published. This portfolio uses synthetic examples to show behavior without exposing private or confidential material.</p>
-      </section>
-
-      <section class="section">
-        <h2>Architectural decision</h2>
-        <p>Make retrieval status explicit. If the system finds relevant evidence, the state is `EVIDENCE_FOUND`. If the system does not have enough evidence, the state is `NO_EVIDENCE` and the response should not invent missing details.</p>
-      </section>
-
-      <section class="section">
-        <h2>Simplified flow</h2>
-        <div class="card">
-          <p>Question -> document search -> chunk selection -> evidence status -> answer with evidence or no-evidence response.</p>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Synthetic example</h2>
-        <div class="metric-block">
-<pre>{
+<body class="antialiased selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="bg-background/80 backdrop-blur-md dark:bg-background/80 docked full-width top-0 sticky z-50 border-b border-white/5">
+<div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter py-4">
+<div class="font-headline-lg text-body-md font-bold text-on-surface dark:text-on-surface">
+        José González Oliva
+      </div>
+<nav class="hidden md:flex gap-md font-body-md text-body-md">
+<a class="text-primary dark:text-primary-fixed font-bold border-b border-primary hover:text-primary transition-colors duration-200" href="../index.html#projects">Projects</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#metrics">Metrics</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#stack">Stack</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#status">Status</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#limitations">Limitations</a>
+</nav>
+<a class="bg-primary text-on-primary font-label-caps px-sm py-xs scale-95 active:scale-90 transition-transform" href="https://github.com/Josegodev">Contact</a>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-gutter py-xl">
+<!-- Hero Section -->
+<section class="mb-xl">
+<span class="font-label-caps text-label-caps text-primary uppercase mb-xs block">Case Study</span>
+<h1 class="font-headline-xl text-headline-xl mb-md max-w-3xl">Evidence-first document RAG</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+        A document retrieval flow designed to check whether evidence exists before asking the model to answer.
+      </p>
+</section>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Main Content Column -->
+<div class="lg:col-span-8 space-y-xl">
+<!-- Problem Section -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-sm">Problem</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            An LLM can generate confident text even when the available documents do not support the answer. This is a hallucination risk: the answer may sound correct but lack evidence.
+          </p>
+</article>
+<!-- Definition Section -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-sm">What RAG means here</h2>
+<div class="space-y-sm font-body-md text-body-md text-on-surface-variant">
+<p>
+              RAG means Retrieval-Augmented Generation. Before asking the model to answer, the system retrieves relevant information from a controlled document base. The model is then expected to answer using that retrieved evidence.
+            </p>
+<p>
+              RAG is not described here as making the AI smarter. It is an engineering pattern for grounding answers in available documents and making the evidence path easier to inspect.
+            </p>
+</div>
+</article>
+<!-- Nuance Section -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-sm">Critical-information nuance</h2>
+<div class="space-y-sm font-body-md text-body-md text-on-surface-variant">
+<p>
+              In sensitive or critical environments, RAG may retrieve controlled operational information. That makes access control, source tracking, logging, document boundaries and evidence status part of the engineering problem.
+            </p>
+<p>
+              The real corpus is not published. This portfolio uses synthetic examples to show behavior without exposing private or confidential material.
+            </p>
+</div>
+</article>
+<!-- Architectural Decision Section -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-sm">Architectural decision</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Make retrieval status explicit. If the system finds relevant evidence, the state is <code class="bg-surface-container px-base py-px font-code-sm text-primary">EVIDENCE_FOUND</code>. If the system does not have enough evidence, the state is <code class="bg-surface-container px-base py-px font-code-sm text-secondary">NO_EVIDENCE</code> and the response should not invent missing details.
+          </p>
+</article>
+<!-- Simplified Flow Section -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-sm">Simplified flow</h2>
+<div class="bg-surface-container-low border border-white/5 p-md">
+<p class="font-code-sm text-code-sm text-on-surface-variant">
+              Question -&gt; document search -&gt; chunk selection -&gt; evidence status -&gt; answer with evidence or no-evidence response.
+            </p>
+</div>
+</article>
+<!-- Synthetic Example (JSON) -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-sm">Synthetic example</h2>
+<div class="bg-surface-container-lowest border border-white/5 p-md overflow-x-auto rounded-lg">
+<pre class="font-code-sm text-code-sm text-tertiary"><code>{
   "query": "Which components are involved in a traceable execution?",
   "retrieval_status": "EVIDENCE_FOUND",
   "chunks": [
@@ -73,39 +208,80 @@
     }
   ],
   "published_corpus": "synthetic_demo_only"
-}</pre>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>What it demonstrates</h2>
-        <p>Engineering focus on reducing and evaluating hallucination risk through evidence retrieval, explicit states, traces, contracts and output checks. It does not claim hallucinations are fully eliminated.</p>
-      </section>
-
-      <section class="section">
-        <h2>Stack</h2>
-        <p>Python, FastAPI, document chunks, retrieval metadata, JSON records, local model providers and synthetic demo evidence.</p>
-      </section>
-
-      <section class="section">
-        <h2>Current status</h2>
-        <p><span class="status">Experimental.</span> Useful as a local architecture and behavior validation flow, not as a published production RAG platform.</p>
-      </section>
-    </div>
-
-    <aside class="card case-nav">
-      <h3>Navigation</h3>
-      <ul class="plain-list">
-        <li><a href="../index.html">Back home</a></li>
-        <li><a href="nucleo-runtime.html">Controlled runtime</a></li>
-        <li><a href="telegram-observability.html">Telegram + observability</a></li>
-        <li><a href="repo-maturity.html">Repository maturity</a></li>
-      </ul>
-    </aside>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">No private corpus, logs or controlled documents are published.</div>
-  </footer>
-</body>
-</html>
+}</code></pre>
+</div>
+</article>
+<!-- Outcome Section -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-sm">What it demonstrates</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Engineering focus on reducing and evaluating hallucination risk through evidence retrieval, explicit states, traces, contracts and output checks. It does not claim hallucinations are fully eliminated.
+          </p>
+</article>
+<!-- Stack Section -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-sm">Stack</h2>
+<div class="flex flex-wrap gap-xs">
+<span class="bg-surface-container text-primary font-code-sm px-sm py-xs border border-primary/20">Python</span>
+<span class="bg-surface-container text-primary font-code-sm px-sm py-xs border border-primary/20">FastAPI</span>
+<span class="bg-surface-container text-primary font-code-sm px-sm py-xs border border-primary/20">Document Chunks</span>
+<span class="bg-surface-container text-primary font-code-sm px-sm py-xs border border-primary/20">Retrieval Metadata</span>
+<span class="bg-surface-container text-primary font-code-sm px-sm py-xs border border-primary/20">JSON Records</span>
+<span class="bg-surface-container text-primary font-code-sm px-sm py-xs border border-primary/20">Synthetic Evidence</span>
+</div>
+</article>
+<!-- Status Section -->
+<article>
+<h2 class="font-headline-lg text-headline-lg mb-sm">Current status</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">
+<strong class="text-secondary font-bold">Experimental.</strong> Useful as a local architecture and behavior validation flow, not as a published production RAG platform.
+          </p>
+</article>
+</div>
+<!-- Navigation Sidebar -->
+<aside class="lg:col-span-4 h-fit sticky top-24">
+<div class="bg-surface-container-low border border-white/5 p-md rounded-lg">
+<h3 class="font-label-caps text-label-caps text-on-surface mb-md">Navigation</h3>
+<ul class="space-y-sm font-body-md text-code-sm">
+<li>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs" href="../index.html"><span class="material-symbols-outlined text-[18px] group-hover:translate-x-[-4px] transition-transform">arrow_back</span>Back home</a>
+</li>
+<li>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs" href="nucleo-runtime.html"><span class="material-symbols-outlined text-[18px]">terminal</span>Controlled runtime</a>
+</li>
+<li>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs" href="telegram-observability.html"><span class="material-symbols-outlined text-[18px]">monitoring</span>Telegram + observability</a>
+</li>
+<li>
+<a class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-xs" href="repo-maturity.html"><span class="material-symbols-outlined text-[18px]">check_circle</span>Repository maturity</a>
+</li>
+</ul>
+</div>
+<div class="mt-md">
+<img class="rounded-lg opacity-40 grayscale hover:grayscale-0 transition-all duration-500 border border-white/5" data-alt="A macro close-up of a high-resolution computer screen displaying complex source code in a dark mode IDE. The aesthetic is clean and professional, with a deep navy and teal color scheme reflecting an expert minimalist developer's workstation. Soft glowing lines of code create a sense of technological precision and architectural order, perfectly aligning with a high-end software engineering portfolio's visual identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC63FCq7hX0bGLwilsFkBD8SwdwtVgL_UqGmXOurOgsyPEXoxmPN5fNDnX-tO3sON4CO22oPjjhn-pGjx-htfteuKcP_FpzYMcpdAEUC8OLmfU_nlmcAFT3s7OuwtLMBZIanCEz4i0z57i4Q0Vb4lPR6TVzyE1FThk9A4hBTuoCLXFwre32Tm6rZVIfmwuAXJjM7OuCsmHsbDkjyqKuaoHodKxwwplNjCxjneO-uRfCPu4IKTWCS416jS2VKWkFazzd0JncbrLR-lGm"/>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest full-width border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-[1200px] mx-auto px-gutter py-xl">
+<div class="mb-md md:mb-0">
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-xs">José González Oliva</p>
+<p class="font-code-sm text-code-sm text-on-surface-variant max-w-sm">
+          Static GitHub Pages portfolio. No dependencies and no sensitive data. AI-assisted development.
+        </p>
+</div>
+<div class="flex gap-md font-code-sm text-code-sm text-secondary dark:text-secondary-fixed">
+<a class="hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="https://github.com/Josegodev">GitHub</a>
+<a class="hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="../ai-assisted-development.html">AI note</a>
+<a class="hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="https://github.com/Josegodev/josegodev.github.io">Source</a>
+</div>
+</div>
+<div class="max-w-[1200px] mx-auto px-gutter pb-md text-center md:text-left">
+<p class="font-code-sm text-[11px] text-on-surface-variant/40">
+            No private corpus, logs or controlled documents are published.
+        </p>
+</div>
+</footer>
+</body></html>

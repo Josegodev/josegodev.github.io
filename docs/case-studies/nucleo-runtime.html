@@ -1,106 +1,293 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Case study: controlled local AI runtime with FastAPI, provider adapters, JSON contracts and traceability.">
-  <title>Controlled local AI runtime | Case study</title>
-  <link rel="stylesheet" href="../styles.css">
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Controlled local AI runtime - José González Oliva</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#44dfab",
+                        "surface-container-highest": "#2f353f",
+                        "surface-container": "#1a2029",
+                        "tertiary": "#c2cee3",
+                        "primary": "#4de6b1",
+                        "background": "#0e141d",
+                        "secondary-fixed-dim": "#ffb95f",
+                        "inverse-primary": "#006c4f",
+                        "surface-dim": "#0e141d",
+                        "primary-fixed-dim": "#44dfab",
+                        "on-surface-variant": "#bbcac1",
+                        "secondary-container": "#ee9800",
+                        "on-secondary-fixed-variant": "#653e00",
+                        "tertiary-fixed-dim": "#bbc7dc",
+                        "outline-variant": "#3c4a43",
+                        "on-tertiary-fixed-variant": "#3c4859",
+                        "on-primary-fixed-variant": "#00513a",
+                        "surface-container-high": "#242a34",
+                        "on-tertiary-fixed": "#101c2c",
+                        "on-background": "#dde2f0",
+                        "on-secondary-container": "#5b3800",
+                        "inverse-on-surface": "#2b313b",
+                        "surface-variant": "#2f353f",
+                        "surface": "#0e141d",
+                        "on-primary": "#003827",
+                        "error-container": "#93000a",
+                        "on-error": "#690005",
+                        "surface-container-low": "#161c25",
+                        "on-tertiary-container": "#394556",
+                        "on-secondary-fixed": "#2a1700",
+                        "on-secondary": "#472a00",
+                        "secondary": "#ffb95f",
+                        "on-surface": "#dde2f0",
+                        "primary-fixed": "#67fcc6",
+                        "surface-container-lowest": "#080e17",
+                        "on-primary-fixed": "#002116",
+                        "primary-container": "#20c997",
+                        "surface-bright": "#343944",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-fixed": "#d7e3f9",
+                        "outline": "#85948c",
+                        "inverse-surface": "#dde2f0",
+                        "on-primary-container": "#004e38",
+                        "error": "#ffb4ab",
+                        "secondary-fixed": "#ffddb8",
+                        "on-tertiary": "#253141",
+                        "tertiary-container": "#a7b3c7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "4rem",
+                        "xs": "0.5rem",
+                        "margin": "auto",
+                        "sm": "1rem",
+                        "lg": "2.5rem",
+                        "base": "4px",
+                        "md": "1.5rem",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Geist"],
+                        "headline-xl": ["Geist"],
+                        "code-sm": ["JetBrains Mono"],
+                        "body-md": ["Geist"],
+                        "headline-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "code-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0e141d;
+            color: #dde2f0;
+            font-family: 'Geist', sans-serif;
+        }
+    </style>
 </head>
-<body>
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="../index.html">José González Oliva</a>
-      <nav class="nav-links" aria-label="Case navigation">
-        <a href="../index.html#projects">Projects</a>
-        <a href="rag-evidence-first.html">RAG</a>
-        <a href="telegram-observability.html">Telegram</a>
-        <a href="repo-maturity.html">Maturity</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="case-header">
-    <div class="wrap">
-      <p class="eyebrow">Case study</p>
-      <h1>Controlled local AI runtime</h1>
-      <p class="subtitle">A curated public view of a local AI backend built around FastAPI, contracts, provider adapters, optional document retrieval and JSON traces.</p>
-    </div>
-  </section>
-
-  <main class="wrap case-layout">
-    <div>
-      <section class="section">
-        <h2>Problem</h2>
-        <p>Many AI prototypes treat the model as the whole system. Prompt, model call, tool access, business rules and final response are often mixed together, which makes failures hard to reproduce and behavior hard to audit.</p>
-      </section>
-
-      <section class="section">
-        <h2>Architectural decision</h2>
-        <p>Build a runtime around the model. In plain English, the runtime is the controlled execution layer that decides how requests are validated, how policies are applied, which provider is called and how the result is recorded.</p>
-        <p>The model does not own the system. It receives controlled context and returns text; the backend owns contracts, permissions, retrieval, tracing and error handling.</p>
-      </section>
-
-      <section class="section">
-        <h2>Key concepts</h2>
-        <div class="grid two">
-          <div class="card">
-            <h3>JSON contracts</h3>
-            <p>JSON is structured text used for predictable requests, responses and execution records. Here it acts as a contract between components, not as loose notes.</p>
-          </div>
-          <div class="card">
-            <h3>Provider adapter</h3>
-            <p>A provider adapter is a small layer that lets the backend call different model providers, such as a local model server or a cloud API, without rewriting the application.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Simplified flow</h2>
-        <div class="card">
-          <p>Request / Telegram / API -> FastAPI -> bot or backend service -> optional RAG -> provider adapter -> response -> JSON trace.</p>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>What it demonstrates</h2>
-        <p>Backend judgment for turning an AI prototype into an inspectable local system with explicit contracts, replaceable model providers, controlled evidence and useful execution records.</p>
-      </section>
-
-      <section class="section">
-        <h2>Stack</h2>
-        <p>Python, FastAPI, Pydantic-style contracts, JSON traces, Telegram integration, local model providers, optional document RAG and local evaluation scripts.</p>
-      </section>
-
-      <section class="section">
-        <h2>Current status</h2>
-        <p><span class="status">Advanced prototype.</span> Useful as a curated technical demo and local experimental backend. It is not presented as production-ready or deployment-ready.</p>
-      </section>
-
-      <section class="section">
-        <h2>Limitations</h2>
-        <ul class="plain-list">
-          <li>No validated high-concurrency behavior.</li>
-          <li>Local JSON-based observability, not centralized monitoring.</li>
-          <li>Private source corpora and real logs are not published.</li>
-          <li>Runtime, labs and scripts must remain clearly separated in public presentation.</li>
-        </ul>
-      </section>
-    </div>
-
-    <aside class="card case-nav">
-      <h3>Navigation</h3>
-      <ul class="plain-list">
-        <li><a href="../index.html">Back home</a></li>
-        <li><a href="rag-evidence-first.html">Evidence-first RAG</a></li>
-        <li><a href="telegram-observability.html">Telegram + observability</a></li>
-        <li><a href="repo-maturity.html">Repository maturity</a></li>
-      </ul>
-    </aside>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">Case study based on public, curated and synthetic examples.</div>
-  </footer>
-</body>
-</html>
+<body class="selection:bg-primary/30 selection:text-primary">
+<!-- TopAppBar from Shared Components JSON -->
+<header class="bg-background/80 backdrop-blur-md dark:bg-background/80 docked full-width top-0 sticky z-50 border-b border-white/5">
+<div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter py-4">
+<span class="font-headline-lg text-body-md font-bold text-on-surface dark:text-on-surface">José González Oliva</span>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-body-md text-body-md text-primary dark:text-primary-fixed font-bold border-b border-primary hover:text-primary transition-colors duration-200" href="../index.html#projects">Projects</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#metrics">Metrics</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#stack">Stack</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#status">Status</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="../index.html#limitations">Limitations</a>
+</nav>
+<a class="bg-primary-container text-on-primary-container px-6 py-2 rounded font-body-md font-bold scale-95 active:scale-90 transition-transform" href="https://github.com/Josegodev">Contact</a>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-gutter py-xl">
+<!-- Hero Section -->
+<div class="mb-xl">
+<nav class="mb-sm">
+<a class="flex items-center gap-xs text-primary font-label-caps text-label-caps hover:gap-sm transition-all" href="../index.html">
+<span class="material-symbols-outlined text-[14px]">arrow_back</span>
+                    CASE STUDY
+                </a>
+</nav>
+<h1 class="font-headline-xl text-headline-xl mb-md">Controlled local AI runtime</h1>
+<p class="font-body-md text-on-surface-variant max-w-2xl text-lg leading-relaxed">
+                A curated public view of a local AI backend built around FastAPI, contracts, provider adapters, optional document retrieval and JSON traces.
+            </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-xl">
+<!-- Left Content Column -->
+<div class="md:col-span-8 space-y-xl">
+<!-- Problem -->
+<section id="problem">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Problem</h2>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                        Many AI prototypes treat the model as the whole system. Prompt, model call, tool access, business rules and final response are often mixed together, which makes failures hard to reproduce and behavior hard to audit.
+                    </p>
+</section>
+<!-- Architectural Decision -->
+<section id="architecture">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Architectural decision</h2>
+<div class="space-y-md">
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                            Build a runtime around the model. In plain English, the runtime is the controlled execution layer that decides how requests are validated, how policies are applied, which provider is called and how the result is recorded.
+                        </p>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                            The model does not own the system. It receives controlled context and returns text; the backend owns contracts, permissions, retrieval, tracing and error handling.
+                        </p>
+</div>
+</section>
+<!-- Key Concepts Bento Grid -->
+<section id="concepts">
+<h2 class="font-headline-lg text-headline-lg mb-md">Key concepts</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-sm">
+<div class="p-md bg-surface-container border border-white/5 rounded hover:border-primary/20 transition-colors">
+<h3 class="font-label-caps text-label-caps text-primary mb-xs">JSON contracts</h3>
+<p class="font-body-md text-on-surface-variant text-sm">
+                                JSON is structured text used for predictable requests, responses and execution records. Here it acts as a contract between components, not as loose notes.
+                            </p>
+</div>
+<div class="p-md bg-surface-container border border-white/5 rounded hover:border-primary/20 transition-colors">
+<h3 class="font-label-caps text-label-caps text-primary mb-xs">Provider adapter</h3>
+<p class="font-body-md text-on-surface-variant text-sm">
+                                A provider adapter is a small layer that lets the backend call different model providers, such as a local model server or a cloud API, without rewriting the application.
+                            </p>
+</div>
+</div>
+</section>
+<!-- Simplified Flow -->
+<section id="flow">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Simplified flow</h2>
+<div class="p-md bg-surface-container-lowest border border-white/5 rounded font-code-sm text-code-sm text-on-surface-variant">
+                        Request / Telegram / API -&gt; FastAPI -&gt; bot or backend service -&gt; optional RAG -&gt; provider adapter -&gt; response -&gt; JSON trace.
+                    </div>
+</section>
+<!-- What it demonstrates -->
+<section id="demonstrates">
+<h2 class="font-headline-lg text-headline-lg mb-sm">What it demonstrates</h2>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                        Backend judgment for turning an AI prototype into an inspectable local system with explicit contracts, replaceable model providers, controlled evidence and useful execution records.
+                    </p>
+</section>
+<!-- Stack -->
+<section id="stack">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Stack</h2>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                        Python, FastAPI, Pydantic-style contracts, JSON traces, Telegram integration, local model providers, optional document RAG and local evaluation scripts.
+                    </p>
+</section>
+<!-- Current Status -->
+<section id="status">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Current status</h2>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+<span class="text-secondary font-bold">Advanced prototype.</span> Useful as a curated technical demo and local experimental backend. It is not presented as production-ready or deployment-ready.
+                    </p>
+</section>
+<!-- Limitations -->
+<section id="limitations">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Limitations</h2>
+<ul class="space-y-sm">
+<li class="flex items-start gap-xs text-on-surface-variant font-body-md">
+<span class="text-primary mt-1.5">•</span>
+<span>No validated high-concurrency behavior.</span>
+</li>
+<li class="flex items-start gap-xs text-on-surface-variant font-body-md">
+<span class="text-primary mt-1.5">•</span>
+<span>Local JSON-based observability, not centralized monitoring.</span>
+</li>
+<li class="flex items-start gap-xs text-on-surface-variant font-body-md">
+<span class="text-primary mt-1.5">•</span>
+<span>Private source corpora and real logs are not published.</span>
+</li>
+<li class="flex items-start gap-xs text-on-surface-variant font-body-md">
+<span class="text-primary mt-1.5">•</span>
+<span>Runtime, labs and scripts must remain clearly separated in public presentation.</span>
+</li>
+</ul>
+</section>
+</div>
+<!-- Right Navigation Sidebar -->
+<aside class="md:col-span-4 hidden md:block">
+<div class="sticky top-24 p-md bg-surface-container-low border border-white/5 rounded">
+<h3 class="font-label-caps text-label-caps mb-md text-on-surface">Navigation</h3>
+<ul class="space-y-sm">
+<li>
+<a class="group flex items-center gap-xs text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="../index.html">
+<span class="text-primary opacity-0 group-hover:opacity-100 transition-opacity">•</span>
+                                Back home
+                            </a>
+</li>
+<li>
+<a class="group flex items-center gap-xs text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="rag-evidence-first.html">
+<span class="text-primary opacity-0 group-hover:opacity-100 transition-opacity">•</span>
+                                Evidence-first RAG
+                            </a>
+</li>
+<li>
+<a class="group flex items-center gap-xs text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="telegram-observability.html">
+<span class="text-primary opacity-0 group-hover:opacity-100 transition-opacity">•</span>
+                                Telegram + observability
+                            </a>
+</li>
+<li>
+<a class="group flex items-center gap-xs text-sm font-body-md text-on-surface-variant hover:text-primary transition-colors" href="repo-maturity.html">
+<span class="text-primary opacity-0 group-hover:opacity-100 transition-opacity">•</span>
+                                Repository maturity
+                            </a>
+</li>
+</ul>
+<div class="mt-xl pt-md border-t border-white/5">
+<div class="p-sm bg-background/50 rounded mb-md">
+<h4 class="font-code-sm text-code-sm text-primary-fixed mb-xs">NUCLEO Project</h4>
+<p class="text-[12px] font-body-md text-on-surface-variant">Ref No: ARCH-AI-2024-01</p>
+</div>
+<img class="w-full h-48 object-cover rounded grayscale hover:grayscale-0 transition-all duration-700" data-alt="A macro photograph of a dark, futuristic semiconductor chip surface with glowing emerald light pathways and intricate geometric circuitry. The lighting is low-key with intense neon teal highlights reflecting off metallic surfaces, creating a technical and advanced engineering atmosphere. The overall style is high-end industrial minimalist with deep shadows and sharp focus on micro-architectural details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA39VomWk9-gNw3IJjx8ribpulMYu-IgrIaMGKPPH6W6GH6C6I4iCmzyv2ix_mgzfHwPWENU3CEGr_0MA-ia6wj7vEl6NT2UnGBe7MeM_RDBipE82v52yJWktfpnD7lDpPtv3sp6pnZ0MMfCEcyiKaUBCTMGWw6OkRlPdIvfGC2dkc-chUvzAZwCUgv1pxXWdpH8jTLHwOBXhHJw-dbtRTQr8J-mGsECDSz72BcaXw4430GGlhwvdlmwPxM2KQwHTE8DC-byv8SCFxV"/>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer from Shared Components JSON -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-white/5">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-[1200px] mx-auto px-gutter py-xl">
+<div class="flex flex-col gap-xs items-center md:items-start mb-md md:mb-0">
+<span class="font-label-caps text-label-caps text-on-surface-variant">José González Oliva</span>
+<p class="font-code-sm text-code-sm text-secondary dark:text-secondary-fixed max-w-sm text-center md:text-left">
+                    Static GitHub Pages portfolio. No dependencies and no sensitive data. AI-assisted development.
+                </p>
+</div>
+<div class="flex items-center gap-8">
+<a class="font-code-sm text-code-sm text-on-surface-variant hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="https://github.com/Josegodev">GitHub</a>
+<a class="font-code-sm text-code-sm text-on-surface-variant hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="../ai-assisted-development.html">AI note</a>
+<a class="font-code-sm text-code-sm text-on-surface-variant hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="https://github.com/Josegodev/josegodev.github.io">Source</a>
+</div>
+</div>
+<div class="max-w-[1200px] mx-auto px-gutter pb-md">
+<p class="text-[10px] font-code-sm text-on-surface-variant/40 text-center">Case study based on public, curated and synthetic examples.</p>
+</div>
+</footer>
+</body></html>

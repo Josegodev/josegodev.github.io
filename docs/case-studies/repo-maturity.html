@@ -1,111 +1,25 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Technical maturity of the portfolio: what is mature, what is experimental and what should not be presented as production.">
-  <title>Technical maturity | Case study</title>
-  <link rel="stylesheet" href="../styles.css">
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="description" content="Technical maturity of the portfolio: what is mature, what is experimental and what should not be presented as production."/>
+<title>Technical maturity | José González Oliva</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Geist:wght@400;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface-container":"#1a2029","surface-container-low":"#161c25","surface-container-lowest":"#080e17","on-surface":"#dde2f0","on-surface-variant":"#bbcac1","primary":"#4de6b1","primary-container":"#20c997","on-primary":"#003827","on-primary-container":"#004e38","background":"#0e141d","secondary":"#ffb95f","secondary-fixed":"#ffddb8"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem"},spacing:{xs:"0.5rem",sm:"1rem",md:"1.5rem",lg:"2.5rem",xl:"4rem",gutter:"24px"},fontFamily:{"label-caps":["JetBrains Mono","monospace"],"headline-xl":["Geist","sans-serif"],"headline-lg":["Geist","sans-serif"],"body-md":["Geist","sans-serif"],"code-sm":["JetBrains Mono","monospace"]},fontSize:{"label-caps":["12px",{lineHeight:"16px",letterSpacing:"0.05em",fontWeight:"600"}],"headline-xl":["48px",{lineHeight:"56px",fontWeight:"700"}],"headline-lg":["32px",{lineHeight:"40px",fontWeight:"600"}],"body-md":["16px",{lineHeight:"24px"}],"code-sm":["14px",{lineHeight:"20px"}]}}}}
+</script>
+<style>body{background:#0e141d;color:#dde2f0;font-family:Geist,sans-serif}.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24}</style>
 </head>
-<body>
-  <header class="site-header">
-    <div class="wrap nav">
-      <a class="brand" href="../index.html">José González Oliva</a>
-      <nav class="nav-links" aria-label="Case navigation">
-        <a href="../index.html#projects">Projects</a>
-        <a href="nucleo-runtime.html">Runtime</a>
-        <a href="rag-evidence-first.html">RAG</a>
-        <a href="telegram-observability.html">Telegram</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="case-header">
-    <div class="wrap">
-      <p class="eyebrow">Technical maturity</p>
-      <h1>Real status of the source work</h1>
-      <p class="subtitle">An honest maturity view for recruiters and technical reviewers.</p>
-    </div>
-  </section>
-
-  <main class="wrap case-layout">
-    <div>
-      <section class="section">
-        <h2>What is mature enough to show</h2>
-        <ul class="plain-list">
-          <li>Clear architectural separation between runtime, contracts, provider adapters, services and traceability.</li>
-          <li>FastAPI backend patterns for health, document and chat flows.</li>
-          <li>Telegram integration as an operational test channel.</li>
-          <li>JSON/JSONL execution records with trace identifiers, latency, RAG status, errors and token metrics when available.</li>
-          <li>Deterministic evals to detect changes in response length, latency, token usage and operational behavior.</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>What is still experimental</h2>
-        <ul class="plain-list">
-          <li>Document RAG depends on corpus quality, document boundaries and chunking strategy.</li>
-          <li>The backend is local and experimental, not a hosted production service.</li>
-          <li>Observability is local and file-based, not centralized monitoring.</li>
-          <li>Labs, scripts and runtime components need curation before being published as an open technical demo.</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>What should not be claimed</h2>
-        <ul class="plain-list">
-          <li>Not production-ready.</li>
-          <li>Not deployment-ready yet.</li>
-          <li>No public high-concurrency validation.</li>
-          <li>No claim of enterprise-grade security or cloud production operation.</li>
-          <li>No private corpus, real logs, local artifacts or confidential documentation are part of the public portfolio.</li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <h2>Recommended next steps</h2>
-        <div class="grid two">
-          <div class="card">
-            <h3>Root dependency file</h3>
-            <p>Add a root requirements file or project metadata so the backend environment is reproducible.</p>
-          </div>
-          <div class="card">
-            <h3>Minimal Dockerfile</h3>
-            <p>Add a small container build for local demo reproducibility, without claiming production deployment.</p>
-          </div>
-          <div class="card">
-            <h3>Parameterized URLs</h3>
-            <p>Move local service URLs into configuration so provider and backend endpoints do not drift across files.</p>
-          </div>
-          <div class="card">
-            <h3>Extended healthcheck</h3>
-            <p>Check backend readiness, model provider availability, RAG data availability and trace-writing capability.</p>
-          </div>
-          <div class="card">
-            <h3>Synthetic RAG demo</h3>
-            <p>Create a publishable document corpus that demonstrates retrieval behavior without exposing private content.</p>
-          </div>
-          <div class="card">
-            <h3>Clean eval baselines</h3>
-            <p>Remove local paths and private run artifacts from public examples, keeping only synthetic reproducible baselines.</p>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <aside class="card case-nav">
-      <h3>Navigation</h3>
-      <ul class="plain-list">
-        <li><a href="../index.html">Back home</a></li>
-        <li><a href="nucleo-runtime.html">Controlled runtime</a></li>
-        <li><a href="rag-evidence-first.html">Evidence-first RAG</a></li>
-        <li><a href="telegram-observability.html">Telegram + observability</a></li>
-      </ul>
-    </aside>
-  </main>
-
-  <footer class="footer">
-    <div class="wrap">Maturity described with public, curated and synthetic examples.</div>
-  </footer>
-</body>
-</html>
+<body class="selection:bg-primary/30 selection:text-primary">
+<header class="bg-background/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/5"><div class="flex justify-between items-center max-w-[1200px] mx-auto px-gutter py-4"><a class="font-headline-lg text-body-md font-bold text-on-surface" href="../index.html">José González Oliva</a><nav class="hidden md:flex items-center gap-md font-body-md text-body-md"><a class="text-on-surface-variant hover:text-primary transition-colors" href="../index.html#projects">Projects</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="../index.html#metrics">Metrics</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="../index.html#stack">Stack</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="../index.html#status">Status</a><a class="text-on-surface-variant hover:text-primary transition-colors" href="../index.html#limitations">Limitations</a></nav><a class="bg-primary text-on-primary px-4 py-2 font-label-caps text-label-caps rounded-lg scale-95 active:scale-90 transition-transform" href="https://github.com/Josegodev">Contact</a></div></header>
+<main class="max-w-[1200px] mx-auto px-gutter py-xl">
+<section class="mb-xl"><span class="font-label-caps text-label-caps text-primary uppercase mb-xs block">Technical maturity</span><h1 class="font-headline-xl text-headline-xl mb-md">Real status of the source work</h1><p class="font-body-md text-on-surface-variant max-w-2xl text-lg leading-relaxed">An honest maturity view for recruiters and technical reviewers.</p></section>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-xl"><div class="md:col-span-8 space-y-xl">
+<section><h2 class="font-headline-lg text-headline-lg mb-sm">What is mature enough to show</h2><ul class="space-y-sm text-on-surface-variant font-body-md"><li>Clear architectural separation between runtime, contracts, provider adapters, services and traceability.</li><li>FastAPI backend patterns for health, document and chat flows.</li><li>Telegram integration as an operational test channel.</li><li>JSON/JSONL execution records with trace identifiers, latency, RAG status, errors and token metrics when available.</li><li>Deterministic evals to detect changes in response length, latency, token usage and operational behavior.</li></ul></section>
+<section><h2 class="font-headline-lg text-headline-lg mb-sm">What is still experimental</h2><ul class="space-y-sm text-on-surface-variant font-body-md"><li>Document RAG depends on corpus quality, document boundaries and chunking strategy.</li><li>The backend is local and experimental, not a hosted production service.</li><li>Observability is local and file-based, not centralized monitoring.</li><li>Labs, scripts and runtime components need curation before being published as an open technical demo.</li></ul></section>
+<section><h2 class="font-headline-lg text-headline-lg mb-sm">What should not be claimed</h2><ul class="space-y-sm text-on-surface-variant font-body-md"><li>Not production-ready.</li><li>Not deployment-ready yet.</li><li>No public high-concurrency validation.</li><li>No claim of enterprise-grade security or cloud production operation.</li><li>No private corpus, real logs, local artifacts or confidential documentation are part of the public portfolio.</li></ul></section>
+<section><h2 class="font-headline-lg text-headline-lg mb-md">Recommended next steps</h2><div class="grid grid-cols-1 sm:grid-cols-2 gap-sm"><div class="p-md bg-surface-container border border-white/5 rounded"><h3 class="font-label-caps text-label-caps text-primary mb-xs">Root dependency file</h3><p class="text-on-surface-variant">Add root project metadata so the backend environment is reproducible.</p></div><div class="p-md bg-surface-container border border-white/5 rounded"><h3 class="font-label-caps text-label-caps text-primary mb-xs">Minimal Dockerfile</h3><p class="text-on-surface-variant">Add a small container build for local demo reproducibility.</p></div><div class="p-md bg-surface-container border border-white/5 rounded"><h3 class="font-label-caps text-label-caps text-primary mb-xs">Parameterized URLs</h3><p class="text-on-surface-variant">Move local service URLs into configuration.</p></div><div class="p-md bg-surface-container border border-white/5 rounded"><h3 class="font-label-caps text-label-caps text-primary mb-xs">Synthetic RAG demo</h3><p class="text-on-surface-variant">Demonstrate retrieval behavior without exposing private content.</p></div></div></section>
+</div><aside class="md:col-span-4 hidden md:block"><div class="sticky top-24 p-md bg-surface-container-low border border-white/5 rounded"><h3 class="font-label-caps text-label-caps mb-md text-on-surface">Navigation</h3><nav class="flex flex-col gap-sm"><a class="text-on-surface-variant hover:text-primary" href="../index.html">Back home</a><a class="text-on-surface-variant hover:text-primary" href="nucleo-runtime.html">Controlled runtime</a><a class="text-on-surface-variant hover:text-primary" href="rag-evidence-first.html">Evidence-first RAG</a><a class="text-on-surface-variant hover:text-primary" href="telegram-observability.html">Telegram + observability</a></nav></div></aside></div>
+</main><footer class="bg-surface-container-lowest border-t border-white/5 mt-xl"><div class="flex flex-col md:flex-row justify-between items-center max-w-[1200px] mx-auto px-gutter py-xl gap-md"><div class="flex flex-col gap-xs items-center md:items-start text-center md:text-left"><span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Maturity described with public, curated and synthetic examples.</span><p class="font-code-sm text-code-sm text-on-surface-variant max-w-md">Static GitHub Pages portfolio. No dependencies and no sensitive data. AI-assisted development.</p></div><div class="flex gap-lg items-center font-code-sm text-code-sm"><a class="text-on-surface-variant hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="https://github.com/Josegodev">GitHub</a><a class="text-on-surface-variant hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="../ai-assisted-development.html">AI note</a><a class="text-on-surface-variant hover:text-secondary opacity-80 hover:opacity-100 transition-opacity" href="https://github.com/Josegodev/josegodev.github.io">Source</a></div></div></footer></body></html>
