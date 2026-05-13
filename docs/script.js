@@ -10,5 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   toggle.addEventListener("click", () => {
     const isHidden = panel.classList.toggle("hidden");
     toggle.setAttribute("aria-expanded", String(!isHidden));
+
+    if (!isHidden) {
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   });
 });
