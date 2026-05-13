@@ -37,7 +37,12 @@
   <main class="wrap">
     <section class="section" aria-labelledby="what-i-build">
       <h2 id="what-i-build">Operational Harnesses for LOCAL LLMs</h2>
-      <p>Not just chatbots or AI demos. I build the control layer around language models: retrieval, context, prompts, model calls, validation, traces, metrics, errors, replayability and evaluation.</p>
+      <p>If the MODEL is the brain of an agent, it should not be confused with the whole system.
+A model can reason, propose actions, and generate responses, but that does not mean it should have unrestricted access to tools, data, APIs, or production workflows.
+In a real environment, an agent without traceability, execution boundaries, authorization policies, and auditable records can quickly become a critical failure surface.
+Just as human imagination does not have direct control over the body or the physical world, a model should not be allowed to act directly on an operating system, a database, an external API, or a business process without mediation.
+This is where NUCLEO (spanish word for Core) comes from: a custom-built agent harness designed to run local or remote models under explicit contracts, full traceability, and granular control over agent capabilities.
+The goal is not to build a “free” agent. The goal is to build an operational layer for agents: controlled, observable, reproducible, and aligned with the user’s real needs.</p>
       <p>A harness is the execution layer that makes a local LLM usable as a software component. The model is only one part of the system; around it, the harness controls what context it receives, what evidence it uses, how each answer is traced, how failures are detected and how different models can be compared under the same conditions.</p>
       <figure class="comparison-figure harness-figure">
         <img class="comparison-image" src="IMAGENES/0b9eb604-a226-4fba-a9bb-fbb0c9ac436d.png" alt="Comparison infographic showing Cloud, OpenClaw and NUCLEO as three AI system architectures, highlighting runtime scope, extensions, memory, evidence, control and execution.">
