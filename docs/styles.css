@@ -148,6 +148,53 @@ main {
   margin-top: 42px;
 }
 
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  line-height: inherit;
+  padding: 0 0 14px;
+  text-align: left;
+}
+
+.accordion-trigger:hover,
+.accordion-trigger:focus-visible {
+  color: var(--accent-strong);
+}
+
+.accordion-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--accent-strong);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.accordion-panel {
+  display: none;
+  padding-top: 18px;
+}
+
+.section.is-open .accordion-panel {
+  display: block;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
