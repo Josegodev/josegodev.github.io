@@ -209,6 +209,23 @@ li {
   font-size: 1.08rem;
 }
 
+.comparison-figure {
+  margin: 22px 0;
+}
+
+.comparison-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+}
+
+.solve-card {
+  margin-top: 16px;
+}
+
 .role-list,
 .stack-list,
 .plain-list {

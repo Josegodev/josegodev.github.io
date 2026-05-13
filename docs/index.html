@@ -67,6 +67,46 @@
       </div>
     </section>
 
+    <section class="section architecture-comparison" aria-labelledby="runtime-comparison">
+      <p class="eyebrow">Architecture comparison</p>
+      <h2 id="runtime-comparison">Controlled AI Runtime: Cloud, OpenClaw and NUCLEO</h2>
+      <p>This comparison shows three different ways to structure AI systems. Cloud platforms prioritize managed services and fast deployment. OpenClaw represents a persistent agent-oriented approach with routing, plugins and background workflows. NUCLEO (LOCALES) focuses on controlled execution: the model is only one replaceable component inside a governed backend runtime.</p>
+
+      <figure class="comparison-figure">
+        <img class="comparison-image" src="../IMAGENES/9a619664-bcba-4997-99d6-523741bf6de1.png" alt="Comparison infographic showing Cloud, OpenClaw and NUCLEO as three AI system architectures, highlighting runtime scope, extensions, memory, evidence, control and execution.">
+      </figure>
+
+      <div class="grid">
+        <article class="card">
+          <h3>Cloud</h3>
+          <p>Cloud AI platforms are useful when speed, scalability and managed services matter most. The trade-off is stronger coupling to the provider stack, less internal control over orchestration, and higher dependency on external pricing, APIs and operational limits.</p>
+        </article>
+        <article class="card">
+          <h3>OpenClaw</h3>
+          <p>OpenClaw represents a more agent-oriented architecture: persistent background processes, routing, plugins, session queues and multi-agent workflows. This is powerful for continuous automation, but it also increases operational complexity.</p>
+        </article>
+        <article class="card">
+          <h3>NUCLEO (LOCALES)</h3>
+          <p>NUCLEO is focused on controlled AI execution. A request enters through FastAPI and moves through explicit runtime boundaries: AgentService, AgentRuntime, Planner, PolicyEngine, ToolRegistry, RAG evidence and controlled execution.</p>
+        </article>
+      </div>
+
+      <div class="card solve-card">
+        <h3>What NUCLEO solves</h3>
+        <p>NUCLEO is not another chatbot. It solves the operational problem of making LLM execution observable, reproducible and debuggable. Each run can record which model was used, which prompt version was active, what evidence was retrieved, which tool was called, whether policy allowed it, how many tokens were consumed, how long it took and what failed.</p>
+        <ul class="plain-list">
+          <li>The model proposes, but the runtime validates.</li>
+          <li>Tools are executed through explicit contracts.</li>
+          <li>RAG evidence is tracked with chunks, sources and retrieval status.</li>
+          <li>Dry runs allow validation without real execution.</li>
+          <li>Approval gates separate planning from action.</li>
+          <li>Traces make debugging and evaluation possible.</li>
+          <li>Local and hybrid model providers can be swapped without rewriting the runtime.</li>
+        </ul>
+        <p>The objective is controlled AI execution: observable, reproducible, debuggable and independent from blind dependency on a single model provider.</p>
+      </div>
+    </section>
+
     <section class="section narrative" aria-labelledby="background">
       <p class="eyebrow">Background</p>
       <h2 id="background">From aerospace systems to local AI</h2>
