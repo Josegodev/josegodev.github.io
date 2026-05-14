@@ -245,6 +245,27 @@ li {
   margin: 0.75rem 0 0;
 }
 
+.interview-grid {
+  margin-top: 18px;
+}
+
+.interview-figure {
+  margin: 16px 0;
+}
+
+.interview-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-soft);
+}
+
+.interview-card .plain-list {
+  margin-top: 12px;
+}
+
 .role-list,
 .stack-list,
 .plain-list {

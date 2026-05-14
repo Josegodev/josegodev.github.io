@@ -118,6 +118,7 @@
             </div>
 <div class="hidden md:flex gap-md font-body-md text-body-md">
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#projects">Projects</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#interview-briefing">Interview</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#metrics">Metrics</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#stack">Stack</a>
 <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#status">Status</a>
@@ -237,6 +238,56 @@
 </div>
 <a class="font-label-caps text-secondary flex items-center gap-xs group-hover:gap-sm transition-all" href="case-studies/telegram-observability.html">Read case study <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
 </div>
+</div>
+</section>
+<!-- Interview Briefing -->
+<section class="py-xl border-t border-white/5" id="interview-briefing">
+<div class="mb-lg">
+<span class="font-label-caps text-label-caps text-primary tracking-widest uppercase">Interview briefing</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-xs mb-sm">Governed AI execution, explained for interviews</h2>
+<p class="font-body-md text-on-surface-variant max-w-3xl leading-relaxed">This section connects my backend AI work with security, identity, cloud operations and organizational adoption. The point is not to claim production ownership of enterprise IAM/PAM platforms, but to explain the operating model behind NUCLEO: identity-aware, policy-controlled, traceable execution.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<details class="bg-surface-container-lowest border border-white/5 p-gutter group">
+<summary class="cursor-pointer font-headline-lg text-[20px] text-on-surface group-open:text-primary">PAM/IAM maps naturally to AI agent governance</summary>
+<img class="w-full h-auto border border-white/10 mt-md mb-md" src="../IMAGENES/ec4a9ba5-6c02-4664-91bb-df27837e344d.png" alt="PAM and IAM governance mapping to controlled AI agent execution, approvals, audit logs and least privilege."/>
+<p class="font-body-md text-on-surface-variant mb-md">Interview message: the same logic used to control human and service access also applies to AI agents. A model should not call tools, secrets or business actions without identity context, policy checks, approvals and audit records.</p>
+<ul class="font-body-md text-on-surface-variant space-y-xs list-disc pl-md">
+<li>IAM answers who is requesting and under which role.</li>
+<li>PAM controls high-risk actions, privileged sessions and secret access.</li>
+<li>NUCLEO applies the same pattern to agent execution: request, policy, tool contract, approval gate, trace.</li>
+</ul>
+</details>
+<details class="bg-surface-container-lowest border border-white/5 p-gutter group">
+<summary class="cursor-pointer font-headline-lg text-[20px] text-on-surface group-open:text-primary">Why my profile fits PAM/IAM integration conversations</summary>
+<img class="w-full h-auto border border-white/10 mt-md mb-md" src="../IMAGENES/86c18106-c4bb-4026-aa99-617cdf85ddbf%20(1).png" alt="Explanation of IAM, PAM and profile fit for enterprise security, Microsoft identity, automation and governed AI access."/>
+<p class="font-body-md text-on-surface-variant mb-md">Interview message: I am not positioning myself as a pure CyberArk product specialist. The fit is integration and governance: enterprise systems, Microsoft identity, automation, SAP context and auditable AI or Copilot-style access.</p>
+<ul class="font-body-md text-on-surface-variant space-y-xs list-disc pl-md">
+<li>IAM verifies identity, roles, SSO and MFA.</li>
+<li>PAM grants temporary elevated access and monitors critical actions.</li>
+<li>My AI governance work extends that logic to tool permissions, traces and approval flows.</li>
+</ul>
+</details>
+<details class="bg-surface-container-lowest border border-white/5 p-gutter group">
+<summary class="cursor-pointer font-headline-lg text-[20px] text-on-surface group-open:text-primary">AI literacy is not the same as AI culture</summary>
+<img class="w-full h-auto border border-white/10 mt-md mb-md" src="../IMAGENES/8a2038b6-9854-4343-9eba-1ea46ac6e047.png" alt="Comparison between AI literacy and AI culture, emphasizing workflow redesign over prompt training."/>
+<p class="font-body-md text-on-surface-variant mb-md">Interview message: teaching prompts is useful, but it is not a full AI strategy. The harder problem is redesigning workflows, deciding what should be automated, measuring outcomes and changing how teams operate.</p>
+<ul class="font-body-md text-on-surface-variant space-y-xs list-disc pl-md">
+<li>AI literacy improves existing tasks.</li>
+<li>AI culture questions whether the task should exist in its current form.</li>
+<li>My work focuses on operational systems: workflows, controls, evaluation and measurable change.</li>
+</ul>
+</details>
+<details class="bg-surface-container-lowest border border-white/5 p-gutter group">
+<summary class="cursor-pointer font-headline-lg text-[20px] text-on-surface group-open:text-primary">Backend is the control room behind cloud and AI systems</summary>
+<img class="w-full h-auto border border-white/10 mt-md mb-md" src="../IMAGENES/a35d699d-be59-49f9-8e29-34e74a86ebf7.png" alt="Backend control layer for Azure cloud environments covering APIs, identity, data, secrets, monitoring, deployment and reliability."/>
+<p class="font-body-md text-on-surface-variant mb-md">Interview message: backend engineering is the control layer that makes cloud and AI systems observable, secure and recoverable. This connects directly with my focus on FastAPI runtimes, traces, provider adapters and controlled tool execution.</p>
+<ul class="font-body-md text-on-surface-variant space-y-xs list-disc pl-md">
+<li>APIs, service logic and integrations define the operating boundary.</li>
+<li>Identity, secrets, logs, health checks and observability keep systems controllable.</li>
+<li>The same backend mindset supports AI agents, Copilot-style tools and local/hybrid LLM runtimes.</li>
+</ul>
+</details>
 </div>
 </section>
 <!-- Execution Metrics: Code Dashboard -->
